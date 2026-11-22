@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#102033">
+<meta name="description" content="Curso interactivo para estudiantes de enfermería: farmacología de urgencias, carro rojo y caja obstétrica, nivel principiante a intermedio.">
+<title>Curso de enfermería | Carro rojo y caja obstétrica</title>
+<style>
+:root{--bg:#0b1422;--panel:#142337;--panel2:#0f1d2e;--text:#edf4fb;--muted:#a9bacb;--line:#294057;--accent:#5dd6c0;--blue:#70b7ff;--good:#42d392;--bad:#ff7777;--warn:#ffd27a}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(145deg,#0b1422,#101f32 55%,#0b1827);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:11px 15px;font-weight:700;background:var(--accent);color:#08221f}
+button.secondary{background:#20354c;color:var(--text);border:1px solid var(--line)}button.ghost{background:transparent;color:var(--muted);border:1px solid var(--line)}button:disabled{opacity:.4;cursor:not-allowed}
+header{position:sticky;top:0;z-index:5;background:#0b1422ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.head{max-width:1100px;margin:auto;padding:13px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}.brand{font-weight:850;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-weight:500;font-size:.75rem}
+main{max-width:1100px;margin:auto;padding:24px 18px 60px}.hero{padding:28px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 90% 0%,#1c5260 0,transparent 36%),var(--panel);margin-bottom:20px}.eyebrow{color:var(--accent);font-size:.78rem;text-transform:uppercase;letter-spacing:1.5px;font-weight:800}.hero h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.08;margin:10px 0}.hero p{color:var(--muted);max-width:760px;line-height:1.6}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:13px}.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:18px}.card h3{margin:4px 0 8px}.card p,.muted{color:var(--muted);line-height:1.55}.card button{margin-top:12px;width:100%}.progress-wrap{height:9px;background:#26394e;border-radius:99px;overflow:hidden;margin:10px 0}.progress{height:100%;width:0;background:var(--accent);transition:width .25s}
+.tabs{display:flex;gap:8px;overflow:auto;padding:4px 0 14px}.tabs button{white-space:nowrap}.tabs button.active{background:var(--accent);color:#08221f}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px;margin:12px 0}.panel h2{margin-top:0}.panel h3{color:var(--accent);margin-bottom:7px}.panel p,.panel li{line-height:1.65;color:#d6e2ed}.callout{border-left:4px solid var(--accent);padding:12px 15px;background:#0e2630;border-radius:9px;margin:14px 0;line-height:1.6}.warning{border-left-color:var(--warn);background:#302719}.danger{border-left-color:var(--bad);background:#321e28}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:0 0 auto}.spacer{flex:1}
+.tag{display:inline-block;padding:5px 9px;border-radius:99px;background:#203d50;color:var(--accent);font-size:.78rem;font-weight:750}
+.lesson-nav{display:flex;justify-content:space-between;gap:10px;margin-top:18px}.lesson-nav button{min-width:110px}
+.qa{border:1px solid var(--line);border-radius:13px;padding:15px;margin:12px 0;background:var(--panel2)}.qa .opts{display:grid;gap:8px;margin-top:12px}.opt{width:100%;text-align:left;background:#1b3046;color:var(--text);border:1px solid var(--line);font-weight:550}.opt.correct{border-color:var(--good);background:#153b34}.opt.wrong{border-color:var(--bad);background:#43232c}.feedback{display:none;margin-top:12px;padding:12px;background:#0b1928;border-radius:10px;line-height:1.5}.flash{min-height:210px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;cursor:pointer;background:linear-gradient(140deg,#17344a,#123b43);border:1px solid #326070;border-radius:20px;padding:28px}.flash .front{font-size:1.3rem;font-weight:800}.flash .back{display:none;color:#d4e8eb;line-height:1.6;margin-top:18px}.flash.revealed .back{display:block}.flash.revealed .hint{display:none}
+.small{font-size:.84rem;color:var(--muted)}.hidden{display:none!important}
+.table-wrap{overflow-x:auto;margin:14px 0}table.learning{width:100%;border-collapse:collapse;min-width:520px}table.learning th,table.learning td{border:1px solid var(--line);padding:10px;text-align:left;vertical-align:top;line-height:1.5}table.learning th{background:#20354c;color:var(--accent)}.source-list li{margin:8px 0}.checklist li{margin:7px 0}.pill-note{display:inline-block;border:1px solid var(--line);border-radius:8px;padding:3px 8px;color:var(--muted);font-size:.78rem}
+.confirm-box{margin-top:12px;padding:12px 14px;border:1px solid var(--warn);background:#2b2317;border-radius:12px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+select{background:#0e1b2a;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:9px 12px;font:inherit}
+label{cursor:pointer}input[type=checkbox]{accent-color:var(--accent);width:18px;height:18px;vertical-align:middle;margin-right:6px}
+.flash:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+footer{max-width:1100px;margin:auto;padding:0 18px 28px;color:var(--muted);font-size:.8rem;line-height:1.5}
+input[type=number]{width:90px;background:#0e1b2a;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:8px}
+@media(max-width:600px){main{padding:15px 12px 45px}.hero{padding:21px}.panel{padding:17px}.head{padding:11px 12px}.head .brand{font-size:.9rem}.lesson-nav button{min-width:0;flex:1}}
+</style>
+</head>
+<body>
+<header><div class="head"><div class="brand">✚ AULA DE URGENCIAS<small>Carro rojo · Caja obstétrica · Farmacología</small></div><div class="row"><span class="small" id="topProgress">0% completado</span><button class="secondary" id="homeBtn">Inicio</button></div></div></header>
+<main>
+<section id="home">
+ <div class="hero"><div class="eyebrow">Estudiantes de enfermería · Principiante a intermedio</div><h1>Carro rojo, caja obstétrica y farmacología de urgencias</h1><p>Aprende a reconocer prioridades, comprender los medicamentos y relacionar cada intervención con los cuidados de enfermería. Avanza con el ciclo E‑C‑P‑R: Explora, Comprende, Practica y Recupera.</p><div class="progress-wrap"><div class="progress" id="progressBar"></div></div><div class="small" id="progressText">Tu progreso se guarda en este navegador.</div></div>
+ <div class="grid" id="moduleCards"></div>
+ <div class="panel"><h2>Resultados de aprendizaje</h2><ul class="checklist"><li>Identificar ritmos de paro y distinguir cuándo se desfibrila.</li><li>Explicar indicaciones, mecanismos y riesgos de los medicamentos seleccionados.</li><li>Reconocer señales de alarma en hemorragia posparto y trastornos hipertensivos del embarazo.</li><li>Describir cuidados de enfermería, lectura segura de etiquetas y comunicación SBAR.</li><li>Leer concentraciones (mg/mL, porcentaje, relaciones como 1:1000) y resolver cálculos básicos de práctica con regla de tres, siempre con doble verificación.</li><li>Resolver casos introductorios, repasar errores y saber cuándo pedir ayuda.</li></ul><div class="callout warning"><b>Alcance del curso:</b> está dirigido a estudiantes. No autoriza a indicar, preparar ni administrar medicamentos de forma independiente. Las actividades clínicas se realizan con supervisión docente y conforme a la normativa y protocolos institucionales.</div></div><div class="panel"><h2>Tu ruta de aprendizaje</h2><p><b>E — Explora:</b> identifica el problema y lo que necesita el organismo.</p><p><b>C — Comprende:</b> entiende qué hace el fármaco y por qué puede ayudar.</p><p><b>P — Practica:</b> responde preguntas y resuelve situaciones clínicas.</p><p><b>R — Recupera:</b> explica sin mirar y repasa al día siguiente, a los 3, 7 y 14 días.</p><div class="row"><button class="secondary" id="resetProgress">Reiniciar progreso</button><span class="small">Borra las lecciones marcadas, errores guardados y tarjetas difíciles de este navegador.</span></div><div id="resetConfirm" class="confirm-box hidden"><span class="small" style="color:var(--warn)">¿Seguro que deseas borrar todo tu progreso y tarjetas difíciles?</span><button id="confirmResetYes">Sí, reiniciar</button><button id="confirmResetNo">Cancelar</button></div><div class="callout warning"><b>Seguridad:</b> material educativo. No sustituye capacitación práctica, protocolos institucionales, indicaciones médicas ni algoritmos vigentes. No uses esta guía como instrucción para preparar o administrar medicamentos a pacientes.</div></div>
+</section>
+<section id="course" class="hidden">
+ <div class="row"><span class="tag" id="moduleTag"></span><span class="spacer"></span><span class="small" id="lessonCount"></span></div>
+ <div class="tabs" id="lessonTabs"></div>
+ <article class="panel" id="lessonContent"></article>
+ <div class="lesson-nav"><button class="secondary" id="prevLesson">← Anterior</button><button id="completeLesson">Marcar como estudiada ✓</button><button class="secondary" id="nextLesson">Siguiente →</button></div>
+</section>
+<section id="practice" class="hidden">
+ <div class="hero"><div class="eyebrow">Memoria activa</div><h1 id="practiceTitle">Práctica</h1><p id="practiceDesc"></p></div>
+ <div id="practiceBody"></div>
+ <div class="row" style="margin-top:15px"><button class="secondary" id="practiceHome">Volver al inicio</button><span class="spacer"></span><button id="nextPractice">Siguiente</button></div>
+</section>
+</main>
+<footer>Material educativo para estudiantes de enfermería. No sustituye la práctica supervisada, la valoración profesional ni los protocolos institucionales. Las dosis, presentaciones y secuencias pueden variar entre guías, fichas técnicas y centros; verifica siempre la fuente vigente.</footer>
+<script>
+const modules = [
+{title:"1. Fundamentos y seguridad",desc:"Aprende el lenguaje básico, lectura de etiquetas y límites seguros.",lessons:[
+{title:"El mapa de una urgencia",html:`<h2>Antes de memorizar medicamentos, identifica el problema</h2><p>En urgencias, un fármaco tiene sentido cuando entiendes qué función intenta modificar. Empieza por cuatro sistemas:</p><h3>Corazón y circulación</h3><p>El corazón impulsa sangre. La presión y la perfusión dependen del bombeo, el volumen circulante y el tono de los vasos. Un vasopresor puede aumentar el tono vascular; un antiarrítmico modifica la actividad eléctrica.</p><h3>Respiración</h3><p>La ventilación mueve aire y la oxigenación permite que el oxígeno llegue a la sangre. Los medicamentos no sustituyen abrir la vía aérea, ventilar o administrar oxígeno cuando esas medidas están indicadas.</p><h3>Sistema nervioso</h3><p>El cerebro coordina conciencia, movimiento y respiración. Algunos fármacos reducen la excitabilidad neuronal; otros pueden deprimir el sistema nervioso.</p><h3>Útero y coagulación</h3><p>El miometrio es el músculo del útero. Si no se contrae adecuadamente después del parto, puede haber atonía y hemorragia. La fibrina forma parte del coágulo; la fibrinólisis lo degrada.</p><div class="callout"><b>Explora:</b> ¿qué necesitarías corregir si el problema es un corazón sin pulso? ¿Y si el útero no se contrae después del parto?</div>`},
+{title:"Cómo estudiar con E‑C‑P‑R",html:`<h2>El ciclo E‑C‑P‑R</h2><h3>E — Explora</h3><p>Observa el tema y pregúntate: ¿qué problema clínico intenta resolver este medicamento?</p><h3>C — Comprende</h3><p>Aprende la idea central: familia farmacológica, mecanismo, indicación y principal riesgo.</p><h3>P — Practica</h3><p>Contesta sin mirar, compara fármacos parecidos y resuelve un caso breve.</p><h3>R — Recupera</h3><p>Cierra el material y explícalo con tus palabras. Repite al día siguiente, a los 3 días, a la semana y a las dos semanas.</p><div class="callout">Regla: no memorices una dosis aislada. Aprende primero la indicación y después verifica dosis, concentración, vía, dilución y velocidad en la referencia vigente.</div>`},
+{title:"Seguridad farmacológica y etiquetas",html:`<h2>Las barreras antes de administrar</h2><p>Verifica identidad, alergias, indicación, paciente, medicamento, dosis, concentración, vía, diluyente, compatibilidad, caducidad y velocidad. Considera peso y función renal/hepática cuando aplique.</p><h3>Lectura crítica de concentración y presentación</h3><p>En urgencias conviven presentaciones con distintas concentraciones (por ejemplo, diferentes <code>mg/mL</code> o porcentajes). Leer solo el tamaño de la ampolleta o recordar un volumen habitual de otro turno es una fuente clásica de error.</p><p>Durante la administración, monitoriza lo que corresponda al fármaco: ECG, presión arterial, saturación, respiración, reflejos, diuresis y respuesta clínica.</p><p>Después, reevalúa, registra y comunica cambios. En emergencias, la coordinación del equipo evita retrasos en RCP, desfibrilación, control de hemorragia o escalamiento.</p><div class="callout danger"><b>Errores peligrosos:</b> confundir mg con mL; confundir concentraciones; asumir que todos los bolos son rápidos; usar una mnemotecnia como sustituto del protocolo; administrar sin leer la etiqueta.</div><div class="callout warning"><b>Sobre las dosis en este curso:</b> en ACLS adulto se muestran dosis de referencia porque son estándar internacional. En obstetricia y en otros fármacos no se muestran dosis, porque dependen de la guía, la presentación y el protocolo de cada unidad. Esos datos se consultan siempre en el protocolo institucional vigente, con tu docente.</div>`},
+{title:"Valoración inicial y comunicación",html:`<h2>Primero observa, valora y comunica</h2><p>En una urgencia, el estudiante debe reconocer cambios, pedir ayuda de inmediato y participar dentro de su nivel de formación y supervisión. Una valoración inicial ordenada evita centrarse demasiado pronto en un medicamento.</p><h3>ABCDE como marco de valoración</h3><ul><li><b>A — Vía aérea:</b> ¿está permeable?, ¿hay obstrucción?</li><li><b>B — Respiración:</b> frecuencia, esfuerzo, expansión torácica y saturación.</li><li><b>C — Circulación:</b> pulso, presión arterial, perfusión, piel y sangrado.</li><li><b>D — Estado neurológico:</b> conciencia, respuesta y glucemia si está indicada.</li><li><b>E — Exposición:</b> buscar lesiones o sangrado, preservar temperatura y privacidad.</li></ul><p>Repite la valoración después de cada intervención y comunica tendencias, no solo un dato aislado.</p><h3>Comunicación SBAR</h3><p><b>S:</b> situación actual. <b>B:</b> antecedentes relevantes. <b>A:</b> valoración y signos encontrados. <b>R:</b> qué ayuda o valoración necesitas.</p><div class="callout">Ejemplo académico: “Paciente en puerperio con sangrado abundante, útero flácido y taquicardia. Solicito valoración obstétrica inmediata; ya iniciamos cuantificación y activación del protocolo bajo supervisión”.</div>`},
+{title:"Rol y límites del estudiante",html:`<h2>Aprender con seguridad también es saber cuándo detenerse</h2><p>El estudiante no debe asumir decisiones ni procedimientos fuera de su competencia. Su papel es observar, reconocer, comunicar, preparar el entorno y colaborar bajo supervisión.</p><ul><li>Identifica el carro rojo/caja obstétrica y verifica ubicación de insumos con el docente.</li><li>Lee en voz alta nombre, concentración, caducidad e integridad del envase durante ejercicios supervisados.</li><li>Realiza cálculos únicamente como práctica académica y solicita doble verificación antes de cualquier uso clínico.</li><li>Registra y comunica hallazgos de forma clara y oportuna.</li><li>Nunca retrasa RCP, desfibrilación, control de hemorragia ni solicitud de ayuda por intentar resolver una duda farmacológica.</li></ul><div class="callout danger"><b>Regla:</b> ante duda de paciente, medicamento, dosis, concentración, vía o indicación, detente y consulta al profesional responsable. No improvises.</div>`},
+{title:"Lectura de concentración y regla de tres",html:`<h2>Leer la etiqueta y calcular con calma (nivel formativo)</h2><p>Esta lección sirve para practicar el razonamiento, no para calcular dosis reales. Los medicamentos y las cifras de los ejemplos son <b>ficticios</b>. En la práctica real, todo cálculo se verifica con otra persona y con el protocolo de la unidad.</p><h3>1. ¿Cómo puede venir escrita la cantidad?</h3><div class="table-wrap"><table class="learning"><thead><tr><th>En la etiqueta</th><th>Cómo se lee</th><th>Equivale a</th></tr></thead><tbody><tr><td>500 mg / 10 mL</td><td>500 mg en total dentro de 10 mL</td><td>500 ÷ 10 = <b>50 mg/mL</b></td></tr><tr><td>20 mg/mL</td><td>20 mg en cada mL</td><td>Una ampolleta de 5 mL contiene 100 mg</td></tr><tr><td>2 %</td><td>2 g en 100 mL</td><td>2000 mg ÷ 100 mL = <b>20 mg/mL</b> (1 % = 10 mg/mL)</td></tr><tr><td>1:1000</td><td>1 g en 1000 mL</td><td><b>1 mg/mL</b> (1:10 000 equivale a 0.1 mg/mL)</td></tr></tbody></table></div><p><b>Unidades:</b> 1 g = 1000 mg · 1 mg = 1000 mcg · 1 L = 1000 mL.</p><h3>2. Regla de tres básica</h3><p>Si <b>X mg</b> están en <b>Y mL</b>, entonces <b>D mg</b> están en: <b>D × Y ÷ X</b> mL.</p><p><b>Ejemplo 1 (fármaco ficticio).</b> Ampolleta con 500 mg en 10 mL. ¿En qué volumen hay 150 mg? 150 × 10 ÷ 500 = <b>3 mL</b>. Comprobación mental: 150 mg es menos que los 500 mg totales, así que el volumen debe ser menor que 10 mL. ✓</p><p><b>Ejemplo 2: la trampa del tamaño.</b> Dos ampolletas de 10 mL del mismo fármaco ficticio: A tiene 200 mg (20 mg/mL) y B tiene 500 mg (50 mg/mL). Para 100 mg: con A son <b>5 mL</b> y con B son <b>2 mL</b>. Mismo tamaño, volumen distinto: por eso nunca se deduce nada por el tamaño de la ampolleta.</p><p><b>Ejemplo 3: porcentaje.</b> Solución al 2 % = 20 mg/mL. Para 40 mg: 40 ÷ 20 = <b>2 mL</b>.</p><p><b>Ejemplo 4: conversión.</b> 0.25 mg × 1000 = <b>250 mcg</b>. El factor entre mg y mcg es 1000.</p><h3>3. Pasos para no equivocarte</h3><ol><li>Escribe los datos con sus unidades.</li><li>Convierte para que las unidades coincidan (mg con mg, mL con mL).</li><li>Plantea la regla de tres.</li><li>Estima: a mayor concentración, menor volumen.</li><li>Pregúntate si el resultado tiene sentido: ¿es mayor que la ampolleta completa?, ¿se desplazó un decimal (0.5 frente a 5)?</li><li>Pide doble verificación a otra persona.</li><li>Si hay duda, detente y consulta al responsable.</li></ol><div class="callout danger"><b>Errores clásicos:</b> confundir los mg totales con los mg por mL; deducir la dosis por el tamaño de la ampolleta; mezclar mg con mcg; mover el punto decimal; no leer la concentración antes de calcular.</div><div class="callout warning">Practica con problemas generados al azar, con fármacos ficticios. Las cifras no son dosis clínicas.</div><button onclick="startPractice('calc')">Ir a la práctica de cálculo</button>`}
+]},
+{title:"2. Carro rojo",desc:"Reanimación, ritmos, fármacos cardiovasculares y técnica segura.",lessons:[
+{title:"Qué hace el carro rojo y revisión básica",html:`<h2>Reanimación general y orden del carro</h2><p>El carro rojo reúne equipo y medicamentos para emergencias vitales generales. En paro cardíaco, el ritmo importa porque determina si corresponde desfibrilación.</p><h3>Ritmos desfibrilables</h3><p>Fibrilación ventricular (FV) y taquicardia ventricular sin pulso (TVSP). La intervención central es RCP de alta calidad y desfibrilación temprana. Los fármacos son complementarios.</p><h3>Ritmos no desfibrilables</h3><p>Asistolia y actividad eléctrica sin pulso (AESP). No se desfibrilan; se priorizan RCP, adrenalina y búsqueda de causas reversibles.</p><h3>Revisión visual formativa del carro</h3><p>Bajo supervisión docente, observa orden por compartimentos, integridad de sellos/candados según norma institucional, fechas de caducidad vigentes y etiquetas legibles antes de iniciar una rotación.</p><div class="callout"><b>Recuerda:</b> FV/TV sin pulso → descarga + RCP. Asistolia/AESP → RCP, adrenalina y causas reversibles; no descarga.</div>`},
+{title:"Adrenalina",html:`<h2>Adrenalina (epinefrina)</h2><p><b>Familia:</b> catecolamina; agonista alfa y beta adrenérgico.</p><p><b>Idea central:</b> su efecto alfa‑1 produce vasoconstricción y ayuda a elevar la presión de perfusión coronaria y cerebral durante la RCP. También tiene efectos beta.</p><p><b>Contextos:</b> paro cardíaco y anafilaxia, con dosis y vías diferentes según el escenario.</p><p><b>Referencia ACLS adulto:</b> en paro, 1 mg IV (o IO si no se logra acceso IV con rapidez; la AHA 2025 prefiere la vía IV) cada 3–5 minutos según algoritmo. En ritmos no desfibrilables se administra tan pronto como sea posible; en FV/TV sin pulso se incorpora después de los intentos iniciales de desfibrilación. No extrapolar esta dosis a anafilaxia ni a pediatría.</p><div class="callout warning">Verifica siempre concentración, presentación, indicación y vía. No confundas la preparación para paro con la de anafilaxia.</div>`},
+{title:"Amiodarona y lidocaína",html:`<h2>Antiarrítmicos en paro</h2><h3>Amiodarona</h3><p>Antiarrítmico con acciones sobre canales iónicos y prolongación de la repolarización. Puede considerarse en FV/TV sin pulso persistente pese a desfibrilación. Referencia ACLS adulto: 300 mg IV (o IO si no hay acceso IV) inicial y, si corresponde, 150 mg adicional.</p><h3>Lidocaína</h3><p>Bloqueador de canales de sodio; puede ser alternativa a amiodarona en FV/TV sin pulso refractaria, según protocolo. La dosificación depende del peso y la guía.</p><div class="callout">No son medicamentos para asistolia o AESP. No reemplazan RCP ni desfibrilación.</div>`},
+{title:"Atropina",html:`<h2>Atropina: bradicardia sintomática</h2><p><b>Familia:</b> antimuscarínico.</p><p><b>Mecanismo:</b> bloquea competitivamente la acetilcolina en receptores muscarínicos y reduce el tono vagal sobre los nodos sinusal y AV.</p><p><b>Uso:</b> puede ser el fármaco inicial en bradicardia sintomática según el algoritmo. Referencia ACLS adulto: 1 mg IV cada 3–5 minutos, máximo 3 mg.</p><p><b>Límite:</b> puede ser ineficaz en bloqueos AV infranodales; algunos pacientes requieren marcapasos y otras medidas.</p><div class="callout">Asociación: atropina = quita freno vagal. No la confundas con adrenalina, que tiene acción adrenérgica.</div>`},
+{title:"Adenosina",html:`<h2>Adenosina: freno transitorio del nodo AV</h2><p>Activa receptores A1 y produce un bloqueo transitorio de la conducción por el nodo auriculoventricular. Se utiliza en determinados casos de taquicardia regular, especialmente de complejo estrecho y estable.</p><p>Por su vida media extremadamente corta, cuando está indicada se administra como bolo IV rápido seguido de lavado inmediato con solución salina, con monitorización ECG y siguiendo el protocolo.</p><div class="callout warning">No es para cualquier taquicardia. Antes se evalúan estabilidad, regularidad, anchura del QRS y posibles contraindicaciones.</div>`},
+{title:"Bicarbonato de sodio",html:`<h2>Bicarbonato: uso selectivo</h2><p>Es un agente alcalinizante. No se recomienda de rutina en todo paro cardíaco. Puede estar indicado en situaciones seleccionadas, por ejemplo intoxicación por antidepresivos tricíclicos con QRS ancho o hiperpotasemia, según el contexto y protocolo.</p><p>La administración indiscriminada puede causar problemas, entre ellos carga de sodio, alcalosis y aumento de CO₂.</p><div class="callout">Memoria: bicarbonato no es “para cualquier acidosis del paro”; primero identifica una indicación específica.</div>`},
+{title:"Secuencia del paro en adultos",html:`<h2>Ritmo, RCP y desfibrilación: el orden importa</h2><p>Este resumen es para estudiar el algoritmo adulto AHA 2025. En la práctica se sigue el algoritmo institucional vigente y se trabaja en equipo.</p><div class="table-wrap"><table class="learning"><thead><tr><th>Ritmo</th><th>Prioridad</th><th>Medicamentos (visión general)</th></tr></thead><tbody><tr><td>FV / TV sin pulso</td><td>RCP de alta calidad y desfibrilación temprana; reanudar compresiones inmediatamente tras la descarga.</td><td>Adrenalina después de intentos iniciales de descarga; considerar amiodarona o lidocaína si persiste refractaria.</td></tr><tr><td>Asistolia / AESP</td><td>RCP de alta calidad, buscar causas reversibles y no desfibrilar.</td><td>Adrenalina tan pronto como sea posible; no usar antiarrítmicos de FV/TV sin pulso como rutina.</td></tr></tbody></table></div><p>Los ciclos de RCP, análisis del ritmo, acceso IV (o IO si no se logra IV con rapidez) y manejo avanzado se realizan según el algoritmo. Minimizar interrupciones es esencial.</p><div class="callout warning"><b>Importante:</b> la desfibrilación no se retrasa para administrar un medicamento. El fármaco no reemplaza compresiones ni descarga.</div>`},
+{title:"Bradicardia y taquicardia con pulso",html:`<h2>No todo ritmo rápido o lento es un paro</h2><h3>Bradicardia</h3><p>Valora si la frecuencia baja se acompaña de hipotensión, alteración aguda de conciencia, signos de choque, dolor isquémico o insuficiencia cardiaca aguda. Busca causas reversibles y solicita apoyo. Atropina puede considerarse en bradicardia sintomática con compromiso hemodinámico; si no responde, pueden requerirse marcapasos y otras medidas avanzadas.</p><h3>Taquicardia</h3><p>Primero valora estabilidad hemodinámica, pulso, anchura del QRS y regularidad. Una taquiarritmia inestable puede requerir cardioversión sincronizada urgente. Adenosina se reserva para escenarios seleccionados, por ejemplo taquicardia regular de complejo estrecho; no se utiliza para toda taquicardia ni en ritmos irregulares o polimórficos.</p><div class="callout danger">El estudiante no decide ni realiza cardioversión o administración farmacológica por cuenta propia. Reconoce la inestabilidad, activa ayuda y prepara monitorización bajo supervisión.</div>`},
+{title:"Las H y las T: causas reversibles",html:`<h2>Buscar la causa del paro</h2><p>Mientras se realizan RCP y medidas del algoritmo, el equipo busca causas potencialmente reversibles. La lista clásica de H y T ayuda a organizar el razonamiento:</p><div class="table-wrap"><table class="learning"><thead><tr><th>H</th><th>T</th></tr></thead><tbody><tr><td>Hipovolemia</td><td>Taponamiento cardíaco</td></tr><tr><td>Hipoxia</td><td>Neumotórax a tensión</td></tr><tr><td>Hidrogeniones (acidosis)</td><td>Trombosis coronaria</td></tr><tr><td>Hipo/hiperpotasemia y otros trastornos metabólicos</td><td>Trombosis pulmonar</td></tr><tr><td>Hipotermia</td><td>Tóxicos</td></tr></tbody></table></div><p>La lista orienta la búsqueda; no sustituye la valoración clínica ni significa que todos los casos requieran el mismo tratamiento.</p><div class="callout">Ejercicio: ante una hemorragia masiva, ¿qué causa reversible considerarías primero? ¿Qué datos y antecedentes comunicarías al equipo?</div>`},
+{title:"Anafilaxia y adrenalina",html:`<h2>Anafilaxia: reconocer y pedir ayuda sin demora</h2><p>La anafilaxia es una reacción sistémica grave de inicio agudo. Puede afectar piel y mucosas, respiración y circulación; la ausencia de lesiones cutáneas no la descarta si hay compromiso respiratorio o circulatorio compatible.</p><h3>Señales de alarma</h3><ul><li>Urticaria generalizada, enrojecimiento o angioedema, especialmente junto con otros síntomas.</li><li>Disnea, sibilancias, estridor, edema de lengua o sensación de cierre de garganta.</li><li>Hipotensión, colapso, síncope o signos de mala perfusión.</li><li>Síntomas gastrointestinales intensos en el contexto de una reacción alérgica aguda.</li></ul><p><b>Tratamiento de primera línea:</b> adrenalina (epinefrina) por vía intramuscular en la cara anterolateral del muslo, de acuerdo con el protocolo. Activar respuesta de emergencia, retirar el desencadenante si es posible, valorar ABC, colocar a la persona de forma apropiada a su estado, monitorizar y preparar soporte respiratorio/circulatorio.</p><div class="callout danger"><b>No confundir escenarios:</b> la dosis y presentación IV/IO del paro cardíaco no se trasladan a anafilaxia. La adrenalina IV en anafilaxia requiere indicación especializada y monitorización; no es la vía inicial habitual. Antihistamínicos y corticoides no sustituyen ni deben retrasar la adrenalina IM.</div><p>Como estudiante, reconoce los signos, activa ayuda, comunica el posible desencadenante y participa bajo supervisión. Revisa siempre la presentación y el protocolo institucional.</p>`},
+{title:"Calidad de RCP y desfibrilación",html:`<h2>RCP de alta calidad: la base de todo lo demás</h2><p>Los fármacos solo ayudan si hay compresiones efectivas. Parámetros de referencia en adultos (AHA):</p><ul><li>Frecuencia de 100 a 120 compresiones por minuto.</li><li>Profundidad de al menos 5 cm y no más de 6 cm.</li><li>Permitir el retroceso completo del tórax; no apoyarse entre compresiones.</li><li>Minimizar las interrupciones y reanudar las compresiones de inmediato después de una descarga.</li><li>Relación 30:2 hasta contar con vía aérea avanzada; después, ventilaciones regulares (aproximadamente una cada 6 segundos según el algoritmo vigente), sin hiperventilar y con elevación visible del tórax.</li><li>Relevo de quien comprime cada 2 minutos aproximadamente, o antes si hay fatiga.</li></ul><p>Si hay capnografía, el equipo la usa para valorar la calidad de la RCP y detectar el retorno de la circulación.</p><h3>Desfibrilador</h3><p>Reconoce la diferencia entre un desfibrilador manual y un DEA. Antes de cada descarga se avisa en voz alta y se verifica que nadie toque a la paciente ni la cama. La energía y la modalidad las decide y ordena el responsable del equipo.</p><div class="callout"><b>Tu papel como estudiante:</b> reconocer compresiones efectivas, apoyar el relevo, registrar tiempos (inicio de RCP, descargas, medicamentos) y comunicar con claridad bajo supervisión.</div>`},
+{title:"Otros medicamentos del carro rojo",html:`<h2>Lo que puedes encontrar además de los fármacos del paro</h2><p>El contenido del carro varía entre unidades. Estos son medicamentos frecuentes; las dosis se consultan en el protocolo y no se muestran aquí.</p><div class="table-wrap"><table class="learning"><thead><tr><th>Medicamento</th><th>Cuándo se considera</th><th>Idea clave</th></tr></thead><tbody><tr><td>Gluconato o cloruro de calcio</td><td>Hiperpotasemia grave, hipocalcemia, toxicidad por magnesio o por bloqueadores de canales de calcio</td><td>No se usa de rutina en paro. Ambas sales aportan distinta cantidad de calcio elemental por mL: lee la etiqueta. Cuidado con la extravasación.</td></tr><tr><td>Dextrosa hipertónica</td><td>Hipoglucemia confirmada</td><td>Primero se mide la glucemia. Puede irritar la vena si hay extravasación.</td></tr><tr><td>Naloxona</td><td>Depresión respiratoria por opioides</td><td>Ventilar sigue siendo prioridad. Su efecto puede durar menos que el del opioide, por lo que la depresión puede reaparecer.</td></tr><tr><td>Norepinefrina o dopamina (infusión)</td><td>Hipotensión o choque, por ejemplo tras recuperar la circulación</td><td>Se administran en infusión controlada con monitorización continua; no son bolos de paro. Riesgo de extravasación.</td></tr><tr><td>Hidrocortisona y antihistamínicos</td><td>Tratamiento adicional en anafilaxia</td><td>No sustituyen ni deben retrasar la adrenalina intramuscular.</td></tr></tbody></table></div><div class="callout warning">Revisa con tu docente la lista real del carro de tu unidad y practica leer concentración, caducidad y presentación de cada uno.</div>`},
+{title:"Después de recuperar la circulación",html:`<h2>Cuidados posparo: el trabajo no termina con el pulso</h2><p>Cuando regresa la circulación espontánea, la paciente sigue en riesgo y puede volver a entrar en paro. El equipo reevalúa de forma continua con el marco ABCDE.</p><ul><li>Evitar hipoxia e hipotensión. La guía AHA 2025 usa un objetivo de saturación de 90 % a 98 %.</li><li>Obtener un ECG de 12 derivaciones, revisar glucemia y buscar la causa del paro.</li><li>Control de temperatura y preparación del traslado a cuidados intensivos, según el protocolo.</li></ul><h3>Cuidados de enfermería</h3><ul><li>Monitorización continua y registro de tendencias.</li><li>Verificar accesos y fijación de dispositivos.</li><li>Documentar tiempos y medicamentos del evento.</li><li>Comunicar con SBAR en el relevo o traslado.</li><li>Apoyar a la familia según indique el equipo.</li></ul><div class="callout">Pregunta de repaso: ¿qué datos darías en un SBAR de traslado después de un paro recuperado?</div>`}
+]},
+{title:"3. Caja obstétrica",desc:"Organización práctica, hemorragia posparto, trastornos hipertensivos y uterotónicos.",lessons:[
+{title:"Organización y dos emergencias",html:`<h2>Cómo se organiza y qué prioridades cubre</h2><p>La caja obstétrica agrupa recursos y fármacos clave para responder sin demoras ante urgencias del embarazo, parto y puerperio, sujetas a revisión periódica de existencias, caducidades y protocolo local.</p><h3>Hemorragia posparto</h3><p>Una causa frecuente es la atonía uterina: el útero no se contrae bien y continúa el sangrado. El tratamiento puede incluir uterotónicos, antifibrinolíticos y medidas obstétricas simultáneas.</p><h3>Preeclampsia grave / eclampsia</h3><p>Hay dos objetivos diferentes: prevenir/tratar convulsiones y controlar la hipertensión grave. No son el mismo tratamiento farmacológico.</p><div class="callout">Pregunta clave: ¿necesito contraer el útero, conservar el coágulo, prevenir convulsiones o bajar la presión?</div>`},
+{title:"Oxitocina",html:`<h2>Oxitocina: contrae el útero</h2><p>Es un uterotónico. Se une a receptores del miometrio y aumenta el calcio intracelular, favoreciendo la contracción uterina. Es de primera línea para prevención y tratamiento de hemorragia posparto por atonía, de acuerdo con el escenario y la guía.</p><p>La administración IV rápida puede provocar hipotensión y otros efectos hemodinámicos. Debe utilizarse la dilución y velocidad establecidas en el protocolo.</p><div class="callout">Asociación: OXItocina → útero se contrae. No es un fármaco que disuelva coágulos.</div>`},
+{title:"Ácido tranexámico",html:`<h2>Tranexámico: protege la fibrina</h2><p>Es un antifibrinolítico. Dificulta la activación del plasminógeno a plasmina y reduce la degradación de fibrina, ayudando a conservar el coágulo.</p><p>En hemorragia posparto se recomienda administrarlo lo antes posible y dentro de las primeras 3 horas del nacimiento, conforme a la guía y protocolo aplicables. No debe retrasar otras medidas del paquete de respuesta ni utilizarse como sustituto del uterotónico.</p><div class="callout">No contrae el útero. Oxitocina trabaja sobre el miometrio; tranexámico trabaja sobre la fibrinólisis.</div>`},
+{title:"Ergonovina, misoprostol y carbetocina",html:`<h2>Otros uterotónicos</h2><h3>Ergonovina / metilergonovina</h3><p>Alcaloide del ergot que produce contracción uterina intensa y sostenida, pero también vasoconstricción. Puede elevar peligrosamente la presión; evitar en hipertensión y preeclampsia.</p><h3>Misoprostol</h3><p>Análogo de prostaglandina E1 que favorece contracción uterina, útil cuando no se dispone de oxitocina, no es suficiente o según el escenario clínico y la guía. Puede causar fiebre, escalofríos y diarrea.</p><h3>Carbetocina</h3><p>Análogo de acción prolongada de oxitocina, utilizado principalmente en la prevención de atonía uterina según el protocolo local. No sustituye por sí solo el manejo integral de una hemorragia activa.</p><div class="callout danger">Asociación: ergonovina + hipertensión = alerta. Revisa contraindicaciones antes de elegir un uterotónico.</div>`},
+{title:"Sulfato de magnesio",html:`<h2>Magnesio: prevenir y tratar convulsiones</h2><p>Es el medicamento de elección para prevenir convulsiones en preeclampsia con datos de severidad y tratar eclampsia. Su mecanismo anticonvulsivante es complejo y no se explica por un único receptor. Aunque puede acompañarse de vasodilatación discreta o caída leve de la presión, no es un antihipertensivo primario ni sustituye a los antihipertensivos en crisis hipertensiva severa.</p><p>Vigila respiración, reflejos osteotendinosos, diuresis y estado clínico según protocolo. La oliguria aumenta el riesgo de acumulación porque la eliminación es renal.</p><div class="callout">Piensa: magnesio = protección anticonvulsiva; no sustituye al fármaco que controla la presión arterial.</div>`},
+{title:"Toxicidad por magnesio y calcio",html:`<h2>Una pareja que debes recordar</h2><p>La pérdida del reflejo patelar suele ser el primer signo clínico de toxicidad por magnesio; después puede aparecer depresión respiratoria y, en casos graves, paro cardíaco. La oliguria no es un signo de toxicidad sino un factor de riesgo de acumulación, porque el magnesio se elimina por el riñón: se comunica al equipo y se vigila más de cerca. Ante sospecha de toxicidad, el equipo debe detener la infusión, pedir ayuda, valorar vía aérea y ventilación, monitorizar y seguir el protocolo.</p><p>El gluconato de calcio IV es el antagonista fisiológico utilizado como antídoto, administrado por personal capacitado. No se debe esperar a que aparezcan todos los signos para actuar.</p><div class="callout danger"><b>MAGNESIO → CALCIO.</b> Recuerda también: suspender magnesio + soporte respiratorio y monitorización. El calcio no sustituye esas medidas.</div>`},
+{title:"Antihipertensivos en crisis obstétrica",html:`<h2>Labetalol, hidralazina y nifedipino</h2><p>Los tres reducen la presión arterial, pero por mecanismos distintos y con precauciones diferentes. La elección, la vía y la dosis las define el equipo médico según el protocolo de la unidad. Aquí aprendes sus diferencias generales y qué vigilar.</p><div class="table-wrap"><table class="learning"><thead><tr><th></th><th>Labetalol</th><th>Hidralazina</th><th>Nifedipino (liberación inmediata)</th></tr></thead><tbody><tr><th>Mecanismo</th><td>Bloquea receptores alfa‑1 y beta: dilata vasos y reduce la frecuencia cardiaca</td><td>Vasodilatador arteriolar directo</td><td>Bloqueador de canales de calcio: relaja la pared arterial</td></tr><tr><th>Vía en los algoritmos</th><td>Intravenosa, según protocolo</td><td>Intravenosa, según protocolo</td><td>Oral, formulación de liberación inmediata</td></tr><tr><th>Efectos frecuentes</th><td>Mareo, bradicardia, hipotensión</td><td>Cefalea, palpitaciones por taquicardia refleja, rubor, náusea o vómito, hipotensión</td><td>Cefalea, rubor, mareo, palpitaciones por taquicardia refleja</td></tr><tr><th>Precauciones principales</th><td>Se evita o se usa con mucha cautela en asma o broncoespasmo, bradicardia significativa, bloqueo AV e insuficiencia cardiaca descompensada</td><td>Puede causar una caída brusca de la presión materna con repercusión en el bienestar fetal; cautela en enfermedad coronaria por la taquicardia refleja</td><td>La vía oral exige paciente despierta que pueda deglutir con seguridad (no durante una convulsión ni con somnolencia). No confundir con formulaciones de liberación prolongada. Se desaconseja la vía sublingual y morder la cápsula por el riesgo de descenso brusco</td></tr><tr><th>Qué vigilar</th><td>Presión, frecuencia cardiaca, sibilancias o dificultad respiratoria</td><td>Presión y frecuencia cardiaca seriadas, cefalea, bienestar fetal cuando corresponda</td><td>Presión, mareo, cefalea, frecuencia cardiaca</td></tr></tbody></table></div><h3>Principios comunes</h3><ul><li>El objetivo es bajar la presión de forma gradual hasta el rango que fija el protocolo, no normalizarla de golpe: un descenso brusco puede comprometer la perfusión materna y fetal.</li><li>Mide la presión con técnica correcta y manguito adecuado, y reevalúa según el protocolo después de cada intervención.</li><li>Documenta hora, fármaco, vía, presión antes y después, y respuesta clínica.</li><li>Si la paciente recibe sulfato de magnesio a la vez, la presión y el estado respiratorio se vigilan de cerca; el magnesio no sustituye al antihipertensivo.</li><li>Los IECA y ARA‑II se evitan durante el embarazo por riesgos fetales, y la ergonovina se evita en hipertensión y preeclampsia.</li></ul><h3>Avisa de inmediato si hay</h3><p>Presión que no responde o que cae demasiado, bradicardia, dificultad respiratoria, dolor torácico, cefalea intensa, alteraciones visuales, dolor epigástrico, alteración de la conciencia o convulsión.</p><div class="callout">Memoria rápida: <b>labetalol</b> = bloquea alfa y beta (cuida frecuencia y asma). <b>Hidralazina</b> = dilata arteriolas (cuida caídas bruscas y taquicardia). <b>Nifedipino</b> = canales de calcio por vía oral, liberación inmediata (paciente despierta).</div><div class="callout warning">Antes de preparar o administrar cualquier antihipertensivo, el estudiante confirma con el responsable: paciente, fármaco, concentración, vía, indicación y monitorización. Si hay duda, se detiene.</div>`},
+{title:"Reconocimiento temprano de hemorragia posparto",html:`<h2>No esperar a que la paciente se vea en choque</h2><p>La pérdida sanguínea debe cuantificarse objetivamente cuando sea posible y acompañarse de valoración clínica repetida. La guía OMS 2025 recomienda activar la primera respuesta ante pérdida medida de ≥500 mL o ≥300 mL acompañada de cualquier signo hemodinámico anormal (pulso &gt;100/min, índice de choque &gt;1, presión sistólica &lt;100 mmHg o diastólica &lt;60 mmHg), lo que ocurra primero dentro de las primeras 24 horas. Se requiere especial vigilancia en las primeras 2 horas.</p><p>La cifra nunca debe utilizarse para ignorar una paciente que presenta deterioro antes de alcanzar el umbral. El contexto clínico y el protocolo local mandan.</p><h3>Las 4 T como ayuda para buscar la causa</h3><ul><li><b>Tono:</b> atonía uterina.</li><li><b>Trauma:</b> lesión del canal del parto o ruptura uterina.</li><li><b>Tejido:</b> retención de placenta o restos.</li><li><b>Trombina:</b> alteraciones de coagulación.</li></ul><div class="callout warning"><b>Alerta:</b> cuantificar sangrado, evaluar signos vitales, activar ayuda y protocolo. No asumir que todo sangrado posparto se debe a atonía.</div>`},
+{title:"Paquete inicial de respuesta a hemorragia",html:`<h2>Intervenciones simultáneas y trabajo en equipo</h2><p>La OMS 2025 recomienda un paquete estandarizado de primera respuesta, a menudo resumido como MOTIVE. Incluye:</p><ul><li><b>M — Masaje uterino</b> cuando está indicado.</li><li><b>O — Oxitócico</b> para favorecer la contracción uterina.</li><li><b>T — Tranexámico</b> temprano, dentro de las primeras 3 horas del nacimiento.</li><li><b>I — Intravenous fluids:</b> líquidos intravenosos según evaluación y protocolo.</li><li><b>V — Vaginal/genital tract examination:</b> exploración para identificar trauma o tejido retenido.</li><li><b>E — Escalation:</b> escalar atención si el sangrado continúa o la paciente se deteriora.</li></ul><p>Las acciones se coordinan; no se espera a completar una para iniciar la siguiente. El equipo puede requerir hemoderivados, procedimientos o intervención quirúrgica.</p><div class="callout">Cuidados de enfermería: cuantificar y registrar pérdida, monitorizar signos vitales y estado mental, mantener accesos según indicación, preparar material, documentar tiempos y comunicar respuesta.</div>`},
+{title:"Preeclampsia grave y eclampsia: prioridades",html:`<h2>Dos objetivos terapéuticos, una atención urgente</h2><p>En hipertensión grave persistente del embarazo o puerperio (presión sistólica ≥160 mmHg o diastólica ≥110 mmHg, confirmada en una segunda medición dentro de 15 minutos), se requiere tratamiento antihipertensivo urgente para reducir el riesgo materno. Las recomendaciones señalan iniciar tratamiento tan pronto como sea posible, idealmente dentro de 30–60 minutos de la confirmación.</p><p>El sulfato de magnesio previene o trata convulsiones; labetalol, hidralazina o nifedipino de liberación inmediata pueden utilizarse para controlar la presión según el algoritmo institucional. No son intercambiables y ambos son urgentes: el equipo los inicia en paralelo según el protocolo. Ante una convulsión activa, la prioridad inmediata es proteger a la paciente, mantener la vía aérea y administrar magnesio, sin dejar sin atender el control de la presión.</p><h3>Vigilancia de enfermería</h3><ul><li>Presión arterial seriada y respuesta al tratamiento.</li><li>Estado neurológico, cefalea intensa, alteraciones visuales y dolor epigástrico.</li><li>Frecuencia respiratoria, reflejos osteotendinosos y diuresis durante magnesio.</li><li>Balance de líquidos y signos de edema pulmonar.</li><li>Bienestar fetal cuando corresponda y según indicación del equipo.</li></ul><div class="callout danger">Una convulsión en embarazo o puerperio es una emergencia: proteger a la paciente de lesiones, pedir ayuda, mantener vía aérea y seguir el protocolo. No introducir objetos en la boca ni sujetar con fuerza las extremidades. Al terminar la convulsión, colocarla de lado (preferentemente decúbito lateral izquierdo) y aspirar secreciones si es necesario.</div>`},
+{title:"Procedimientos y apoyo más allá de los fármacos",html:`<h2>Cuando el paquete inicial no basta</h2><p>La hemorragia posparto no se resuelve solo con medicamentos. Según el protocolo y los recursos disponibles, el equipo puede recurrir a:</p><ul><li><b>Compresión uterina bimanual o compresión aórtica externa:</b> maniobras de control temporal realizadas por personal capacitado.</li><li><b>Balón de taponamiento uterino:</b> puede considerarse si el sangrado persiste; su disponibilidad y uso dependen de la unidad.</li><li><b>Hemoderivados y transfusión:</b> se solicitan de forma oportuna, sin esperar al choque.</li><li><b>Intervención quirúrgica:</b> cuando las medidas anteriores no controlan el sangrado.</li></ul><h3>Cuidados de enfermería</h3><ul><li>Cuantificar la pérdida con campo calibrado o pesando material (1 g equivale aproximadamente a 1 mL) y registrar tiempos.</li><li>Identificar con doble verificación a la paciente y cada unidad de sangre antes de transfundir; vigilar durante la transfusión.</li><li>Mantener a la paciente abrigada: la hipotermia empeora la coagulación.</li><li>Preparar el material y comunicar cambios en signos vitales y sangrado.</li></ul><div class="callout warning"><b>Escalar temprano:</b> si el sangrado continúa pese al paquete inicial, la respuesta es avisar y escalar, no esperar.</div>`},
+{title:"Contexto en México y protocolos locales",html:`<h2>Esta guía es una base; tu protocolo manda</h2><p>El curso usa referencias internacionales. En tu unidad pueden variar los umbrales, los medicamentos disponibles y las secuencias.</p><ul><li>Consulta la NOM‑007‑SSA2‑2016 (atención durante el embarazo, parto y puerperio) y las guías de práctica clínica del catálogo CENETEC sobre hemorragia obstétrica y estados hipertensivos del embarazo, siempre en su versión vigente.</li><li>Pregunta cómo funciona en tu unidad la activación de respuesta ante emergencia obstétrica, por ejemplo el Código Mater donde se aplica.</li><li>Los criterios OMS 2025 para hemorragia posparto son recientes: tu unidad puede seguir aún umbrales anteriores.</li></ul><div class="callout danger">Si el protocolo de tu unidad difiere de lo que aprendiste aquí, sigue el protocolo institucional vigente y pregunta a tu docente el porqué. El estudiante no cambia protocolos por cuenta propia.</div><p><b>Ejercicio:</b> pide a tu docente el protocolo de hemorragia obstétrica y el de hipertensión grave de tu unidad y compáralos con las lecciones de este módulo. Anota diferencias y dudas.</p>`}
+]},
+{title:"4. Integración y repaso",desc:"Compara medicamentos, aplica reglas de seguridad y practica con casos.",lessons:[
+{title:"Comparaciones esenciales",html:`<h2>Aprende por contraste</h2><p><b>Oxitocina vs. tranexámico:</b> la primera contrae el útero; el segundo limita la degradación de fibrina.</p><p><b>Magnesio vs. gluconato de calcio:</b> magnesio previene/trata convulsiones; calcio es el antídoto fisiológico ante toxicidad por magnesio.</p><p><b>Adrenalina vs. atropina:</b> adrenalina es catecolamina con acción alfa/beta; atropina bloquea receptores muscarínicos y puede ayudar en bradicardia.</p><p><b>Amiodarona vs. adenosina:</b> amiodarona puede usarse en FV/TV sin pulso refractaria; adenosina frena transitoriamente el nodo AV en taquicardia supraventricular seleccionada.</p><div class="callout">Si puedes explicar la diferencia sin repetir una frase memorizada, estás comprendiendo.</div>`},
+{title:"Repetición espaciada",html:`<h2>Calendario para recordar</h2><ul><li><b>Al terminar:</b> explica cada fármaco sin mirar.</li><li><b>Día 1:</b> repasa tarjetas y corrige errores.</li><li><b>Día 3:</b> resuelve dos casos sin apuntes.</li><li><b>Día 7:</b> repite preguntas y explica cada respuesta.</li><li><b>Día 14:</b> repasa solo lo que fallaste y enséñalo a otra persona.</li><li><b>Día 30:</b> haz una simulación verbal de prioridades y seguridad.</li></ul><p>Marca las tarjetas como “difícil”, “bien” o “fácil” y repasa primero las que marcaste como difíciles.</p>`},
+{title:"Ficha de estudio de un medicamento",html:`<h2>Plantilla para estudiar cualquier fármaco</h2><p>Completa esta ficha en tu cuaderno para cada medicamento de la caja o carro. No llenes los campos con datos de memoria: verifica en una fuente vigente y en la presentación real disponible.</p><div class="table-wrap"><table class="learning"><tbody><tr><th>Nombre genérico y familia</th><td>¿Cómo se llama y a qué grupo pertenece?</td></tr><tr><th>Presentación y concentración</th><td>¿Qué dice exactamente la etiqueta? ¿Qué unidades utiliza?</td></tr><tr><th>Indicación</th><td>¿En qué situación clínica se considera y con qué objetivo?</td></tr><tr><th>Mecanismo</th><td>¿Qué hace en el organismo?</td></tr><tr><th>Vía y administración</th><td>¿Qué indica el protocolo? ¿Hay precauciones de velocidad o dilución?</td></tr><tr><th>Contraindicaciones y riesgos</th><td>¿Qué condiciones requieren evitarlo o extremar vigilancia?</td></tr><tr><th>Cuidados de enfermería</th><td>¿Qué valorar antes, durante y después?</td></tr><tr><th>Fuente y fecha</th><td>¿Qué guía, ficha técnica o protocolo respalda la información?</td></tr></tbody></table></div><div class="callout warning">Nunca deduzcas la dosis a partir del tamaño de la ampolleta ni confundas mg, mcg, mL, porcentaje o unidades internacionales.</div>`},
+{title:"Bibliografía, normativa y actualización",html:`<h2>Fuentes para verificar y seguir aprendiendo</h2><p>Este curso utiliza fuentes internacionales de referencia para los conceptos generales. En México, contrasta siempre con la normativa oficial aplicable, guías de práctica clínica / lineamientos técnicos institucionales, cuadro básico y protocolos vigentes de tu unidad hospitalaria.</p><ul class="source-list"><li><a href="https://cpr.heart.org/en/resuscitation-science/cpr-and-ecc-guidelines/adult-advanced-life-support" target="_blank" rel="noopener">American Heart Association. Guidelines 2025: Adult Advanced Life Support.</a> Paro cardíaco, bradicardia y taquicardia en adultos.</li><li><a href="https://www.heart.org/-/media/CPR-Files/CPR-Guidelines-Files/2025-Accessible/Algorithm-ACLS-CA-LngDscrp-250725-Ed.pdf" target="_blank" rel="noopener">AHA 2025. Algoritmo de paro cardíaco en adultos.</a></li><li><a href="https://pubmed.ncbi.nlm.nih.gov/41122884/" target="_blank" rel="noopener">AHA 2025. Part 9: Adult Advanced Life Support (resumen en PubMed).</a> Incluye la preferencia por acceso IV sobre IO.</li><li><a href="https://www.who.int/news/item/05-10-2025-global-health-agencies-issue-new-recommendations-to-help-end-deaths-from-postpartum-haemorrhage" target="_blank" rel="noopener">OMS, FIGO e ICM (octubre de 2025). Nuevas recomendaciones sobre hemorragia posparto.</a> Umbral de 300 mL con signos anormales y paquete MOTIVE.</li><li><a href="https://www.who.int/publications/i/item/9789240115637" target="_blank" rel="noopener">Organización Mundial de la Salud. Guía consolidada para prevención, diagnóstico y tratamiento de hemorragia posparto (2025).</a></li><li><a href="https://www.ncbi.nlm.nih.gov/books/NBK619233/" target="_blank" rel="noopener">OMS 2025. Recomendaciones y evidencia de hemorragia posparto.</a></li><li><a href="https://pubmed.ncbi.nlm.nih.gov/30575639/" target="_blank" rel="noopener">ACOG. Committee Opinion 767: tratamiento urgente de hipertensión grave durante embarazo y puerperio.</a></li><li>Normativa mexicana: NOM‑007‑SSA2‑2016 y guías de práctica clínica del catálogo CENETEC. Consulta siempre la versión vigente.</li><li><a href="https://www.worldallergyorganizationjournal.org/article/S1939-4551%2820%2930375-6/fulltext" target="_blank" rel="noopener">World Allergy Organization. Anaphylaxis Guidance 2020.</a> Reconocimiento y adrenalina intramuscular como primera línea.</li></ul><p><b>Control documental:</b> versión educativa 2.3 · revisión de contenido: noviembre de 2026. Antes de cada ciclo académico, el docente responsable debe revisar las fuentes, comprobar que los enlaces sigan activos y actualizar el contenido conforme a guías y protocolos vigentes.</p>`}
+]}
+];
+
+const questions = [
+["¿Qué significa E en E‑C‑P‑R?","B","Explora activa conocimientos previos y permite identificar el problema antes de estudiar el fármaco.",["Explica","Explora","Ejecuta","Evalúa"]],
+["¿Cuáles son los ritmos desfibrilables?","B","FV y TV sin pulso son desfibrilables; asistolia y AESP no lo son.",["Asistolia y AESP","FV y TV sin pulso","Bradicardia y asistolia","Todos los ritmos de paro"]],
+["¿Qué efecto ayuda a la adrenalina durante RCP?","B","El efecto alfa‑1 produce vasoconstricción y favorece la presión de perfusión coronaria y cerebral.",["Bloqueo muscarínico","Vasoconstricción alfa‑1","Disolución de fibrina","Contracción uterina"]],
+["¿En qué escenario se considera amiodarona durante paro?","C","En FV/TV sin pulso persistente pese a desfibrilación, de acuerdo con el algoritmo.",["Asistolia","AESP","FV/TV sin pulso refractaria","Bradicardia sinusal"]],
+["¿Qué hace atropina?","A","Bloquea receptores muscarínicos y reduce el tono vagal; puede ayudar en bradicardia sintomática seleccionada.",["Antagoniza acetilcolina en receptores muscarínicos","Inhibe fibrinólisis","Estimula receptores uterinos","Antagoniza magnesio"]],
+["¿Por qué adenosina se administra como bolo rápido cuando está indicada?","B","Tiene vida media extremadamente corta; se administra rápidamente y se sigue de lavado inmediato.",["Porque dura muchas horas","Por su vida media muy corta","Para contraer el útero","Para evitar la desfibrilación"]],
+["¿El bicarbonato se administra rutinariamente en todo paro?","B","No. Tiene indicaciones específicas, como ciertos casos de intoxicación por tricíclicos o hiperpotasemia.",["Sí, siempre","No, se reserva para indicaciones concretas","Solo en fibrilación ventricular","Es el primer fármaco en asistolia"]],
+["¿Qué es atonía uterina?","C","Falta de contracción adecuada del útero después del parto.",["Presión arterial elevada","Convulsión","Falta de contracción uterina","Destrucción de fibrina"]],
+["¿Qué hace la oxitocina?","A","Estimula el miometrio y favorece la contracción uterina.",["Favorece contracción uterina","Inhibe el nodo AV","Bloquea plasmina","Trata toxicidad por magnesio"]],
+["¿Qué hace el ácido tranexámico?","D","Es antifibrinolítico: limita la degradación de fibrina y ayuda a conservar el coágulo.",["Baja la presión","Es uterotónico","Es antiarrítmico","Limita la fibrinólisis"]],
+["¿Por qué evitar ergonovina en preeclampsia?","B","Puede causar vasoconstricción y empeorar la hipertensión.",["Porque produce hipoglucemia","Por riesgo de crisis hipertensiva","Porque bloquea magnesio","Porque causa bradicardia"]],
+["¿Para qué se usa sulfato de magnesio en eclampsia?","C","Previene y trata convulsiones; no sustituye a los antihipertensivos en crisis hipertensiva severa.",["Para contraer el útero","Para disolver coágulos","Para prevenir/tratar convulsiones","Para desfibrilar"]],
+["¿Cuál es el antídoto fisiológico de toxicidad por magnesio?","A","Gluconato de calcio IV, además de suspender la infusión y dar soporte clínico.",["Gluconato de calcio","Naloxona","Atropina","Vitamina K"]],
+["¿Qué debe vigilarse durante sulfato de magnesio?","D","Respiración, reflejos osteotendinosos, diuresis y estado clínico.",["Solo temperatura","Solo presión arterial","Solo glucosa","Respiración, reflejos y diuresis"]],
+["¿Cuál es la diferencia entre labetalol e hidralazina?","B","Labetalol bloquea alfa‑1 y beta; hidralazina es vasodilatador arteriolar directo.",["Ambos son uterotónicos","Labetalol bloquea alfa/beta; hidralazina dilata arteriolas","Ambos son anticonvulsivantes","Ambos son antifibrinolíticos"]],
+["Antes de administrar un medicamento, ¿qué es esencial?","C","Verificar paciente, fármaco, indicación, dosis, concentración, vía, dilución, velocidad y monitorización.",["Confiar en el color de la ampolleta","Usar una dosis recordada sin verificar","Verificar los elementos de seguridad","Omitir la etiqueta"]],
+["En FV/TV sin pulso, ¿qué intervención no debe retrasarse para administrar fármacos?","A","La RCP de alta calidad y la desfibrilación temprana son prioridades. La medicación se integra en el algoritmo sin retrasar la descarga.",["Desfibrilación cuando está indicada","Administrar bicarbonato","Obtener una radiografía","Esperar a tener acceso venoso central"]],
+["Según el algoritmo AHA 2025, ¿cuándo se administra adrenalina en un ritmo no desfibrilable?","B","En asistolia/AESP se recomienda administrarla tan pronto como sea posible, junto con RCP y búsqueda de causas reversibles.",["Después de tres descargas","Tan pronto como sea posible","Solo después de amiodarona","Nunca"]],
+["¿Cuáles son las 4 T de hemorragia posparto?","D","Tono, trauma, tejido y trombina ayudan a organizar la búsqueda de causas.",["Taquicardia, temperatura, tensión y tono","Tórax, tejido, trombosis y temperatura","Tono, taquicardia, trauma y tensión","Tono, trauma, tejido y trombina"]],
+["¿Qué criterio de la OMS 2025 puede activar la respuesta temprana a hemorragia posparto?","C","Pérdida medida ≥500 mL o ≥300 mL con un signo hemodinámico anormal, lo que ocurra primero; siempre considerar el contexto clínico.",["Solo 1,000 mL","Solo hipotensión profunda","≥500 mL o ≥300 mL con signo hemodinámico anormal","Cualquier manchado sin valoración"]],
+["¿Qué intervención integra el paquete inicial recomendado por OMS para hemorragia posparto?","A","El paquete incluye masaje uterino, uterotónico, tranexámico, líquidos IV, examen del tracto genital y escalamiento.",["Masaje uterino, uterotónico, tranexámico, líquidos, examen y escalamiento","Solo oxitocina","Solo transfusión","Esperar resultados de laboratorio antes de actuar"]],
+["¿Cuál es el objetivo principal del sulfato de magnesio en preeclampsia grave/eclampsia?","B","Se utiliza para prevenir o tratar convulsiones; no es el antihipertensivo principal.",["Contraer el útero","Prevenir o tratar convulsiones","Disminuir la fibrinólisis","Tratar toda taquicardia"]],
+["Ante una presión ≥160 sistólica o ≥110 diastólica persistente en embarazo/puerperio, ¿qué debe reconocerse?","D","La hipertensión grave persistente requiere respuesta y tratamiento antihipertensivo urgente según protocolo, en paralelo con otras medidas como el magnesio cuando está indicado; no debe quedar sin atender.",["Es un hallazgo normal del embarazo","Solo se trata si hay convulsiones","Se espera una hora y se vuelve a medir","Es una urgencia que requiere tratamiento oportuno"]],
+["¿Qué debe hacer un estudiante si no puede confirmar concentración o vía de un medicamento?","C","Debe detenerse y consultar al profesional responsable. No se improvisa ni se administra por suposición.",["Elegir la presentación que conoce","Preguntar a otro estudiante y continuar","Detenerse y consultar al responsable","Calcular según el volumen de la ampolleta"]],
+["¿Cuál es el tratamiento farmacológico de primera línea en anafilaxia?","B","La adrenalina intramuscular en la cara anterolateral del muslo es el tratamiento farmacológico inicial. No debe retrasarse por antihistamínicos o corticoides.",["Antihistamínico oral","Adrenalina intramuscular","Hidrocortisona como único fármaco","Adrenalina IV en bolo para todos"]],
+["¿Cuál es la frecuencia de compresiones recomendada en RCP de adultos?","C","La referencia es de 100 a 120 compresiones por minuto, con profundidad de 5 a 6 cm y retroceso completo del tórax.",["60 a 80 por minuto","80 a 100 por minuto","100 a 120 por minuto","140 a 160 por minuto"]],
+["Según la AHA 2025, ¿qué acceso se prefiere para administrar fármacos en paro?","A","Se prefiere el acceso IV; el IO se usa si no se logra IV con rapidez, para no retrasar la adrenalina.",["IV, con IO si no se obtiene IV con rapidez","IO en todos los casos","Intramuscular en todos los casos","Siempre vía central"]],
+["¿Cuál suele ser el primer signo clínico de toxicidad por sulfato de magnesio?","D","Suele ser la pérdida del reflejo patelar; después puede aparecer depresión respiratoria.",["Convulsión","Fiebre","Taquicardia","Pérdida del reflejo patelar"]],
+["¿Cómo se interpreta la oliguria durante una infusión de magnesio?","B","Es un factor de riesgo de acumulación porque el magnesio se elimina por el riñón; se comunica al equipo y se vigila más de cerca.",["Es un hallazgo normal sin importancia","Indica riesgo de acumulación y se comunica","Es un efecto deseado del fármaco","Indica que debe aumentarse la infusión"]],
+["¿Se recomienda calcio de rutina en todo paro cardíaco?","C","No. Se reserva para situaciones específicas, como hiperpotasemia grave, hipocalcemia o toxicidad por magnesio.",["Sí, en todo paro","Sí, pero solo en asistolia","No, se reserva para indicaciones concretas","Solo en FV refractaria"]],
+["Una paciente convulsiona en el puerperio. ¿Qué hace primero el estudiante?","A","Pide ayuda de inmediato, protege de lesiones y cuida la vía aérea; no introduce objetos en la boca ni sujeta con fuerza.",["Pedir ayuda, proteger a la paciente y cuidar la vía aérea","Introducir un objeto en la boca","Sujetar con fuerza brazos y piernas","Esperar a que termine sin avisar"]],
+["Si la unidad usa un umbral distinto al de la guía OMS 2025, ¿qué corresponde?","D","Seguir el protocolo institucional vigente y consultar al responsable; el estudiante no cambia protocolos por cuenta propia.",["Aplicar el umbral que prefiera","Ignorar ambos y esperar el choque","Cambiar el protocolo de la unidad","Seguir el protocolo vigente y consultar al responsable"]],
+["Una ampolleta de 10 mL (fármaco ficticio) contiene 500 mg. ¿Cuál es su concentración?","B","Concentración = mg ÷ mL = 500 ÷ 10 = 50 mg/mL.",["5 mg/mL","50 mg/mL","500 mg/mL","0.5 mg/mL"]],
+["¿Cuántos mg/mL tiene una solución etiquetada al 2 %?","C","2 % significa 2 g en 100 mL: 2000 mg ÷ 100 mL = 20 mg/mL.",["2 mg/mL","0.2 mg/mL","20 mg/mL","200 mg/mL"]],
+["Con una concentración de 20 mg/mL (fármaco ficticio), ¿en cuántos mL están contenidos 50 mg?","A","Volumen = 50 ÷ 20 = 2.5 mL.",["2.5 mL","0.4 mL","25 mL","5 mL"]],
+["Dos ampolletas del mismo volumen tienen distinta cantidad de fármaco. ¿Qué implica para el cálculo?","B","El tamaño no indica la concentración; para los mismos mg, el volumen necesario cambia según los mg/mL de cada una.",["El volumen a tomar es el mismo en ambas","El volumen necesario cambia según la concentración","Se puede calcular solo con el tamaño de la ampolleta","No es necesario leer la etiqueta"]],
+["¿A cuántos mcg equivalen 0.25 mg?","D","1 mg = 1000 mcg, por lo tanto 0.25 × 1000 = 250 mcg.",["2.5 mcg","25 mcg","2500 mcg","250 mcg"]],
+["¿Qué precaución importante se tiene con labetalol?","C","Por su efecto beta‑bloqueante, se evita o se usa con cautela en asma o broncoespasmo, bradicardia significativa, bloqueo AV e insuficiencia cardiaca descompensada.",["Se evita en toda paciente con migraña","Solo se usa por vía sublingual","Se evita o usa con cautela en asma, bradicardia significativa o bloqueo AV","Se combina siempre con ergonovina"]],
+["¿Qué formulación de nifedipino se menciona en los algoritmos de hipertensión grave del embarazo?","A","Se emplea la formulación oral de liberación inmediata; la de liberación prolongada no corresponde al manejo agudo.",["Oral de liberación inmediata","Oral de liberación prolongada","Intravenosa","Sublingual"]],
+["¿Qué se vigila especialmente con hidralazina?","D","Puede causar caída brusca de la presión, taquicardia refleja y cefalea; se monitoriza presión, frecuencia cardiaca, síntomas y bienestar fetal cuando corresponde.",["Solo la glucosa","Solo la temperatura","Únicamente la diuresis","Presión, taquicardia refleja y cefalea"]],
+["¿Cómo debe descender la presión en hipertensión grave del embarazo?","B","El objetivo es reducirla de forma gradual hasta el rango que define el protocolo, evitando descensos bruscos que comprometan la perfusión materna y fetal.",["Hasta cifras normales lo más rápido posible","De forma gradual dentro del rango que define el protocolo","No es necesario volver a medirla","Solo se baja si hay convulsión"]]
+];
+
+const TOPICS = { fund: "Fundamentos y seguridad", carro: "Carro rojo", obst: "Caja obstétrica", calculo: "Cálculo y preparación" };
+const QUESTION_TOPICS = ["fund","carro","carro","carro","carro","carro","carro","obst","obst","obst","obst","obst","obst","obst","obst","fund","carro","carro","obst","obst","obst","obst","obst","fund","carro","carro","carro","obst","obst","carro","obst","fund","calculo","calculo","calculo","calculo","calculo","obst","obst","obst","obst"];
+
+const cases=[
+{q:"Una persona presenta paro y el monitor muestra fibrilación ventricular. ¿Qué prioridad corresponde?",a:"RCP de alta calidad y desfibrilación temprana. Los medicamentos se incorporan según el algoritmo y no sustituyen las descargas ni las compresiones.",prompt:"¿Qué intervención no debe retrasarse?"},
+{q:"Después del parto hay sangrado abundante y útero flácido. ¿Qué diferencia hay entre oxitocina y tranexámico?",a:"Oxitocina favorece la contracción del miometrio; tranexámico limita la degradación de fibrina. No son intercambiables. Se requiere respuesta obstétrica integral y protocolo.",prompt:"Explica qué objetivo cumple cada uno."},
+{q:"Una paciente con preeclampsia recibe magnesio y presenta pérdida de reflejos y respiración lenta. ¿Qué alerta debes reconocer?",a:"Sospecha de toxicidad por magnesio. Suspender infusión, activar ayuda, evaluar vía aérea/ventilación y monitorizar; gluconato de calcio IV según protocolo por personal capacitado.",prompt:"¿Qué acciones de seguridad deben activarse?"},
+{q:"Paciente con hipertensión grave del embarazo. ¿Por qué se separa el magnesio del antihipertensivo?",a:"El magnesio se utiliza para prevenir/tratar convulsiones (sin sustituir al antihipertensivo en crisis severa); labetalol, hidralazina o nifedipino se utilizan para controlar la presión según protocolo.",prompt:"¿Qué objetivo tiene cada grupo?"},
+{q:"Se considera adenosina para taquicardia regular de complejo estrecho en paciente estable. ¿Qué característica técnica debes recordar?",a:"Cuando está indicada, se administra como bolo IV rápido seguido de lavado inmediato, con monitorización ECG y protocolo.",prompt:"¿Por qué no se administra como infusión lenta?"},
+{q:"Una paciente en puerperio tiene pérdida sanguínea medida de 350 mL, pulso de 112/min y presión sistólica de 98 mmHg. ¿Por qué no debes esperar a que sangre más?",a:"La guía OMS 2025 recomienda activar la primera respuesta desde ≥300 mL si existe un signo hemodinámico anormal. Debe cuantificarse, reevaluarse y activarse el protocolo sin demora.",prompt:"¿Qué datos objetivos comunicarías al equipo?"},
+{q:"Durante una práctica observas que la etiqueta de una ampolleta no coincide con la concentración anotada en la hoja de preparación. ¿Qué haces?",a:"Detener el proceso, no preparar ni administrar, conservar la etiqueta para verificación y avisar al profesional responsable/docente. Se aclara la discrepancia antes de continuar.",prompt:"¿Qué riesgo se evita al detenerse?"},
+{q:"Una paciente embarazada presenta presión arterial de 168/112 mmHg confirmada en una segunda medición a los 15 minutos. ¿Qué prioridad debe reconocer el estudiante?",a:"Es hipertensión grave persistente y requiere activar respuesta urgente y tratamiento antihipertensivo conforme al protocolo. El sulfato de magnesio tiene un objetivo anticonvulsivante y no sustituye el control urgente de presión.",prompt:"Diferencia el objetivo del magnesio y del antihipertensivo."},
+{q:"Una paciente convulsiona en el puerperio inmediato. ¿Qué haces como estudiante?",a:"Pedir ayuda de inmediato, proteger de lesiones, mantener la vía aérea y colocarla de lado al terminar la convulsión. No introducir objetos en la boca ni sujetar con fuerza. El equipo decide magnesio y control de presión según protocolo.",prompt:"¿Qué acciones debes evitar?"},
+{q:"Dos ampolletas del mismo tamaño tienen etiquetas distintas: 200 mg y 500 mg del mismo fármaco ficticio. Quieres practicar el cálculo del volumen que contiene 100 mg. ¿Qué debes recordar?",a:"El tamaño no indica la concentración. Con 200 mg en 10 mL (20 mg/mL) son 5 mL; con 500 mg en 10 mL (50 mg/mL) son 2 mL. Se calcula con la etiqueta, se estima si el resultado tiene sentido y se solicita doble verificación.",prompt:"¿Por qué no basta mirar el tamaño de la ampolleta?"}
+];
+
+const cards=[
+["¿Qué hace la adrenalina en paro?","Su efecto alfa‑1 causa vasoconstricción y ayuda a mejorar la presión de perfusión durante RCP."],
+["¿Cuáles son los ritmos desfibrilables?","Fibrilación ventricular y taquicardia ventricular sin pulso."],
+["¿Para qué se considera amiodarona en paro?","FV/TV sin pulso persistente pese a desfibrilación, según algoritmo."],
+["¿Qué hace atropina?","Bloquea receptores muscarínicos y reduce el tono vagal; puede ayudar en bradicardia sintomática seleccionada."],
+["¿Por qué adenosina se da rápido?","Su vida media es extremadamente corta; bolo rápido seguido de lavado cuando está indicada."],
+["¿Qué hace oxitocina?","Estimula el miometrio y favorece contracción uterina."],
+["¿Qué hace tranexámico?","Antifibrinolítico: limita la degradación de fibrina."],
+["¿Por qué evitar ergonovina en preeclampsia?","Puede producir vasoconstricción y empeorar la hipertensión."],
+["¿Para qué sirve sulfato de magnesio?","Previene y trata convulsiones en preeclampsia grave/eclampsia."],
+["¿Cuál es el antídoto fisiológico de toxicidad por magnesio?","Gluconato de calcio IV, junto con suspensión de magnesio y soporte clínico."],
+["¿Qué vigilar con magnesio?","Respiración, reflejos osteotendinosos, diuresis y estado clínico."],
+["¿Diferencia entre labetalol e hidralazina?","Labetalol bloquea alfa‑1 y beta; hidralazina dilata arteriolas."],
+["¿Cuáles son las 4 T de hemorragia posparto?","Tono, trauma, tejido y trombina."],
+["¿Qué integra el paquete inicial de hemorragia posparto?","Masaje uterino, uterotónico, tranexámico, líquidos IV, examen del tracto genital y escalamiento."],
+["¿Qué indica el magnesio en preeclampsia grave?","Prevención y tratamiento de convulsiones; no sustituye el antihipertensivo."],
+["¿Qué hacer ante una discrepancia de concentración?","Detenerse, no administrar y consultar al profesional responsable."],
+["¿Qué significa SBAR?","Situación, antecedentes, valoración y recomendación/solicitud."],
+["¿Qué ritmo no se desfibrila?","Asistolia y actividad eléctrica sin pulso (AESP)."],
+["¿Parámetros básicos de compresiones en adultos?","100–120 por minuto, 5–6 cm de profundidad, retroceso completo y mínimas interrupciones."],
+["¿Qué acceso prefiere la AHA 2025 en paro?","IV; IO si no se logra IV con rapidez."],
+["¿Primer signo clínico de toxicidad por magnesio?","Pérdida del reflejo patelar; después puede haber depresión respiratoria."],
+["¿Qué significa la oliguria con magnesio?","Riesgo de acumulación por eliminación renal; se comunica y se vigila."],
+["¿Calcio de rutina en paro?","No; se reserva para hiperpotasemia grave, hipocalcemia o toxicidad por magnesio."],
+["¿Precaución clave de labetalol?","Evitar o extremar cautela en asma o broncoespasmo, bradicardia significativa, bloqueo AV e insuficiencia cardiaca descompensada."],
+["¿Qué formulación de nifedipino se usa en crisis hipertensiva obstétrica?","Oral de liberación inmediata, con la paciente despierta y capaz de deglutir; no sublingual."],
+["¿Qué vigilar con hidralazina?","Caída brusca de presión, taquicardia refleja, cefalea y bienestar fetal cuando corresponda."],
+["¿Cómo se lee una concentración?","mg ÷ mL = mg/mL. Ejemplo ficticio: 500 mg en 10 mL = 50 mg/mL."],
+["¿Cuántos mg/mL tiene una solución al 1 %?","10 mg/mL (1 g en 100 mL)."]
+];
+
+const DAY = 86400000;
+let storageOK = true;
+try { localStorage.setItem("_t", "1"); localStorage.removeItem("_t"); } catch (e) { storageOK = false; }
+function storeGet(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    if (raw === null) return fallback;
+    const v = JSON.parse(raw);
+    const okType = Array.isArray(fallback) ? Array.isArray(v) : (v !== null && typeof v === "object" && !Array.isArray(v));
+    return okType ? v : fallback;
+  } catch (e) { return fallback; }
+}
+function storeSet(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} }
+function storeRemove(key) { try { localStorage.removeItem(key); } catch (e) {} }
+let completed = storeGet("courseDone", []);
+let wrongQuestionIndices = storeGet("wrongQuestionIndices", []);
+let cardState = storeGet("cardState", {});
+let quizConfig = storeGet("quizConfig", {});
+if (quizConfig.topic !== "all" && !TOPICS[quizConfig.topic]) quizConfig.topic = "all";
+if (typeof quizConfig.shuffle !== "boolean") quizConfig.shuffle = true;
+const topicOf = i => QUESTION_TOPICS[i] || "fund";
+function shuffleInPlace(a) {
+  for (let k = a.length - 1; k > 0; k--) {
+    const r = Math.floor(Math.random() * (k + 1));
+    [a[k], a[r]] = [a[r], a[k]];
+  }
+  return a;
+}
+let calcScore = 0, calcTotal = 0;
+const legacyHard = storeGet("hardCards", []);
+if (legacyHard.length) {
+  legacyHard.forEach(i => { if (!cardState[i]) cardState[i] = { level: "hard", due: 0 }; });
+  storeSet("cardState", cardState);
+  storeRemove("hardCards");
+}
+const hardCount = () => Object.values(cardState).filter(s => s && s.level === "hard").length;
+let currentModule = 0, currentLesson = 0, practiceMode = "", practiceIndex = 0, flashDeck = [], flashIndex = 0, flashRevealed = false, score = 0, answered = 0, activeQuestions = questions.map((q, idx) => ({ q, origIdx: idx }));
+
+const allLessons = () => modules.reduce((a, m) => a + m.lessons.length, 0);
+
+function save() {
+  storeSet("courseDone", completed);
+  storeSet("cardState", cardState);
+  storeSet("wrongQuestionIndices", wrongQuestionIndices);
+  updateProgress();
+}
+
+function updateProgress() {
+  let pct = Math.round(completed.length / allLessons() * 100);
+  document.getElementById("topProgress").textContent = pct + "% completado";
+  document.getElementById("progressBar").style.width = pct + "%";
+  document.getElementById("progressText").textContent = `${completed.length} de ${allLessons()} lecciones marcadas · ${wrongQuestionIndices.length} error(es) guardado(s) · ${hardCount()} tarjeta(s) difícil(es).${storageOK ? "" : " ⚠ Tu navegador no permite guardar el progreso (modo privado o almacenamiento bloqueado)."}`;
+}
+
+function show(id) {
+  ["home", "course", "practice"].forEach(x => document.getElementById(x).classList.toggle("hidden", x !== id));
+  window.scrollTo(0, 0);
+}
+
+function renderHome() {
+  let box = document.getElementById("moduleCards");
+  box.innerHTML = "";
+  modules.forEach((m, i) => {
+    let done = m.lessons.filter((l, j) => completed.includes(i + "-" + j)).length;
+    let d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML = `<span class="tag">MÓDULO ${i + 1}</span><h3>${m.title}</h3><p>${m.desc}</p><div class="progress-wrap"><div class="progress" style="width:${done / m.lessons.length * 100}%"></div></div><div class="small">${done}/${m.lessons.length} lecciones completadas</div><button>Estudiar módulo</button>`;
+    d.querySelector("button").onclick = () => openLesson(i, 0);
+    box.appendChild(d);
+  });
+  updateProgress();
+}
+
+function openLesson(mi, li) {
+  currentModule = mi;
+  currentLesson = li;
+  renderLesson();
+  show("course");
+}
+
+function renderLesson() {
+  let m = modules[currentModule], l = m.lessons[currentLesson];
+  document.getElementById("moduleTag").textContent = m.title;
+  document.getElementById("lessonCount").textContent = `Lección ${currentLesson + 1} de ${m.lessons.length}`;
+  let tabs = document.getElementById("lessonTabs");
+  tabs.innerHTML = "";
+  m.lessons.forEach((x, i) => {
+    let b = document.createElement("button");
+    b.className = i === currentLesson ? "" : "secondary";
+    b.textContent = (i + 1) + ". " + x.title;
+    b.onclick = () => { currentLesson = i; renderLesson(); };
+    tabs.appendChild(b);
+  });
+  document.getElementById("lessonContent").innerHTML = l.html;
+  let key = currentModule + "-" + currentLesson;
+  let done = completed.includes(key);
+  let cb = document.getElementById("completeLesson");
+  cb.textContent = done ? "Estudiada ✓" : "Marcar como estudiada ✓";
+  cb.className = done ? "secondary" : "";
+  document.getElementById("prevLesson").disabled = currentLesson === 0;
+  document.getElementById("nextLesson").disabled = currentLesson === m.lessons.length - 1;
+}
+
+document.getElementById("completeLesson").onclick = () => {
+  let k = currentModule + "-" + currentLesson;
+  if (!completed.includes(k)) completed.push(k);
+  save();
+  renderLesson();
+};
+
+document.getElementById("prevLesson").onclick = () => { if (currentLesson > 0) { currentLesson--; renderLesson(); } };
+document.getElementById("nextLesson").onclick = () => {
+  if (currentLesson < modules[currentModule].lessons.length - 1) { currentLesson++; renderLesson(); }
+  else { show("home"); renderHome(); }
+};
+document.getElementById("homeBtn").onclick = () => { show("home"); renderHome(); };
+
+function buildFlashDeck() {
+  const now = Date.now();
+  const all = cards.map((_, i) => i);
+  const pool = practiceMode === "flashAll" ? all : all.filter(i => !cardState[i] || cardState[i].due <= now);
+  const isHard = i => cardState[i] && cardState[i].level === "hard";
+  return [...pool.filter(isHard), ...pool.filter(i => !isHard(i))];
+}
+
+function startPractice(mode) {
+  practiceMode = mode;
+  practiceIndex = 0;
+  score = 0;
+  answered = 0;
+  if (mode === "wrong") {
+    const validWrong = wrongQuestionIndices.filter(i => i >= 0 && i < questions.length);
+    activeQuestions = validWrong.map(i => ({ q: questions[i], origIdx: i }));
+    if (quizConfig.shuffle) shuffleInPlace(activeQuestions);
+  } else {
+    activeQuestions = questions.map((q, idx) => ({ q, origIdx: idx }));
+  }
+  flashDeck = buildFlashDeck();
+  flashIndex = 0;
+  flashRevealed = false;
+  show("practice");
+  if (mode === "wrong" && !activeQuestions.length) { renderNoWrong(); return; }
+  if (mode === "quiz") { renderQuizSetup(); return; }
+  if (mode === "wrong") renderQuestion();
+  if (mode === "calc") { calcScore = 0; calcTotal = 0; renderCalc(); }
+  if (mode === "flash" || mode === "flashAll") renderFlash();
+  if (mode === "cases") renderCase();
+  if (mode === "review") renderReview();
+}
+
+function practiceShell(title, desc) {
+  document.getElementById("practiceTitle").textContent = title;
+  document.getElementById("practiceDesc").textContent = desc;
+  document.getElementById("practiceBody").innerHTML = "";
+}
+
+function renderQuestion() {
+  const isWrongMode = practiceMode === "wrong";
+  practiceShell(
+    isWrongMode ? "Repaso de preguntas falladas" : "Preguntas de memoria activa",
+    isWrongMode
+      ? "Refuerza las preguntas donde tuviste fallos. Si aciertas, se retiran de tu lista de pendientes."
+      : "Elige una respuesta. Lee la explicación incluso cuando aciertes."
+  );
+  let item = activeQuestions[practiceIndex];
+  let q = item.q;
+  let body = document.getElementById("practiceBody");
+  const letters = ["A", "B", "C", "D"];
+  const correctIdx = letters.indexOf(q[1]);
+  const shuffled = q[3].map((text, idx) => ({ text, ok: idx === correctIdx }));
+  for (let k = shuffled.length - 1; k > 0; k--) {
+    const r = Math.floor(Math.random() * (k + 1));
+    [shuffled[k], shuffled[r]] = [shuffled[r], shuffled[k]];
+  }
+  let div = document.createElement("div");
+  div.className = "panel";
+  div.innerHTML = `<div class="small">Pregunta ${practiceIndex + 1} de ${activeQuestions.length}</div><h2>${q[0]}</h2><div class="opts"></div><div class="feedback"></div>`;
+  let fb = div.querySelector(".feedback");
+  let nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Responder";
+  nextBtn.onclick = () => {
+    if (!div.dataset.done) {
+      fb.style.display = "block";
+      fb.textContent = "Selecciona una opción antes de continuar.";
+      return;
+    }
+    if (practiceIndex < activeQuestions.length - 1) {
+      practiceIndex++;
+      renderQuestion();
+    } else {
+      practiceShell("Resultado de práctica", `Aciertos: ${score} de ${activeQuestions.length}. Este resultado es formativo y no equivale a una certificación de competencia clínica.`);
+      document.getElementById("practiceBody").innerHTML = `<div class="panel"><h2>${Math.round(score / activeQuestions.length * 100)}%</h2><p>${score}/${activeQuestions.length} respuestas correctas.</p><p>${score / activeQuestions.length >= .8 ? "Buen dominio inicial. Refuerza los puntos que fallaste." : "Repasa los conceptos y vuelve a intentarlo."}</p><button id="retryQuiz">Repetir evaluación</button> <button class="secondary" id="changeTopic">Cambiar tema</button> <button class="secondary" id="retryWrong" ${wrongQuestionIndices.length ? "" : "disabled"}>Repasar errores (${wrongQuestionIndices.length})</button></div>`;
+      document.getElementById("retryQuiz").onclick = () => startQuiz();
+      document.getElementById("changeTopic").onclick = () => startPractice("quiz");
+      document.getElementById("retryWrong").onclick = () => startPractice("wrong");
+      nextBtn.textContent = "Inicio";
+      nextBtn.onclick = () => { show("home"); renderHome(); };
+    }
+  };
+
+  shuffled.forEach((o, i) => {
+    let b = document.createElement("button");
+    b.className = "opt";
+    b.textContent = letters[i] + ") " + o.text;
+    b.onclick = () => {
+      if (div.dataset.done) return;
+      div.dataset.done = "1";
+      answered++;
+      let correct = o.ok;
+      if (correct) {
+        score++;
+        wrongQuestionIndices = wrongQuestionIndices.filter(x => x !== item.origIdx);
+      } else if (!wrongQuestionIndices.includes(item.origIdx)) {
+        wrongQuestionIndices.push(item.origIdx);
+      }
+      save();
+      b.classList.add(correct ? "correct" : "wrong");
+      [...div.querySelectorAll(".opt")].forEach((x, j) => {
+        x.disabled = true;
+        if (shuffled[j].ok) x.classList.add("correct");
+      });
+      fb.style.display = "block";
+      fb.innerHTML = `<b>${correct ? "¡Correcto!" : "Repasa este punto (guardado para repasar errores)."}</b><br>${q[2]}`;
+      nextBtn.textContent = practiceIndex === activeQuestions.length - 1 ? "Ver resultado" : "Siguiente";
+    };
+    div.querySelector(".opts").appendChild(b);
+  });
+  body.appendChild(div);
+}
+
+function renderQuizSetup() {
+  practiceShell("Preguntas de memoria activa", "Elige el tema y cómo quieres practicar. Las opciones de respuesta siempre se mezclan en cada intento.");
+  const counts = { all: questions.length };
+  Object.keys(TOPICS).forEach(k => { counts[k] = questions.filter((_, i) => topicOf(i) === k).length; });
+  const options = [["all", "Todos los temas"], ...Object.entries(TOPICS)]
+    .map(([k, label]) => `<option value="${k}"${quizConfig.topic === k ? " selected" : ""}>${label} (${counts[k]})</option>`).join("");
+  document.getElementById("practiceBody").innerHTML = `<div class="panel"><h2>Configura tu práctica</h2><div class="row" style="margin:12px 0"><label for="qTopic" class="small">Tema</label><select id="qTopic">${options}</select></div><div class="row" style="margin:12px 0"><label class="small"><input type="checkbox" id="qShuffle"${quizConfig.shuffle ? " checked" : ""}>Mezclar el orden de las preguntas</label></div><p class="small" id="qHint"></p><button id="qStart">Comenzar</button></div>`;
+  const sel = document.getElementById("qTopic");
+  const chk = document.getElementById("qShuffle");
+  const update = () => {
+    quizConfig.topic = sel.value;
+    quizConfig.shuffle = chk.checked;
+    storeSet("quizConfig", quizConfig);
+    document.getElementById("qHint").textContent = `${counts[sel.value]} pregunta(s) en esta selección.`;
+    document.getElementById("qStart").disabled = counts[sel.value] === 0;
+  };
+  sel.onchange = update;
+  chk.onchange = update;
+  update();
+  document.getElementById("qStart").onclick = () => { update(); startQuiz(); };
+  const nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Inicio";
+  nextBtn.onclick = () => { show("home"); renderHome(); };
+}
+
+function startQuiz() {
+  practiceMode = "quiz";
+  practiceIndex = 0;
+  score = 0;
+  answered = 0;
+  if (quizConfig.topic !== "all" && !TOPICS[quizConfig.topic]) quizConfig.topic = "all";
+  const idxs = questions.map((_, i) => i).filter(i => quizConfig.topic === "all" || topicOf(i) === quizConfig.topic);
+  if (quizConfig.shuffle) shuffleInPlace(idxs);
+  activeQuestions = idxs.map(i => ({ q: questions[i], origIdx: i }));
+  show("practice");
+  if (!activeQuestions.length) { renderQuizSetup(); return; }
+  renderQuestion();
+}
+
+const pick = a => a[Math.floor(Math.random() * a.length)];
+const fmtN = n => String(Math.round(n * 1000) / 1000);
+
+function genCalc() {
+  const t = Math.floor(Math.random() * 6);
+  if (t === 0) {
+    const C = pick([1, 2, 5, 10, 20, 25, 40, 50]), V = pick([2, 5, 10]), M = C * V;
+    return { text: `Fármaco X (ficticio): la etiqueta dice ${M} mg en ${V} mL. ¿Cuál es la concentración?`, ans: C, unit: "mg/mL",
+      steps: `Concentración = mg ÷ mL = ${M} ÷ ${V} = ${C} mg/mL.` };
+  }
+  if (t === 1) {
+    const C = pick([1, 2, 5, 10, 20, 50]), x = pick([0.5, 1, 1.5, 2, 2.5, 4, 5]), D = C * x;
+    return { text: `Fármaco X (ficticio) tiene una concentración de ${C} mg/mL. Como ejercicio, ¿cuántos mL contienen ${fmtN(D)} mg?`, ans: x, unit: "mL",
+      steps: `Volumen = mg ÷ (mg/mL) = ${fmtN(D)} ÷ ${C} = ${fmtN(x)} mL.` };
+  }
+  if (t === 2) {
+    const P = pick([0.5, 1, 2, 5, 10, 20]);
+    return { text: `Una solución ficticia está etiquetada al ${P} %. Recuerda que 1 % = 1 g en 100 mL. ¿Cuántos mg/mL tiene?`, ans: P * 10, unit: "mg/mL",
+      steps: `${P} % = ${P} g en 100 mL = ${fmtN(P * 1000)} mg ÷ 100 mL = ${fmtN(P * 10)} mg/mL (cada 1 % equivale a 10 mg/mL).` };
+  }
+  if (t === 3) {
+    if (Math.random() < 0.5) {
+      const v = pick([0.1, 0.25, 0.5, 2, 5]);
+      return { text: `Convierte ${v} mg a mcg.`, ans: v * 1000, unit: "mcg",
+        steps: `1 mg = 1000 mcg, entonces ${v} × 1000 = ${fmtN(v * 1000)} mcg.` };
+    }
+    const v = pick([100, 250, 500, 2000]);
+    return { text: `Convierte ${v} mcg a mg.`, ans: v / 1000, unit: "mg",
+      steps: `1000 mcg = 1 mg, entonces ${v} ÷ 1000 = ${fmtN(v / 1000)} mg.` };
+  }
+  if (t === 4) {
+    const V = pick([2, 5, 10]), C = pick([10, 20, 25, 50]), M = C * V;
+    const x = pick([0.5, 1, 1.5, 2, 2.5].filter(n => n <= V)), D = C * x;
+    return { text: `Una ampolleta ficticia contiene ${M} mg en ${V} mL. Con regla de tres, ¿cuántos mL contienen ${fmtN(D)} mg?`, ans: x, unit: "mL",
+      steps: `${M} mg → ${V} mL; ${fmtN(D)} mg → ?. Resultado = ${fmtN(D)} × ${V} ÷ ${M} = ${fmtN(x)} mL.` };
+  }
+  const [cA, cB, D] = pick([[20, 50, 100], [10, 40, 80], [25, 50, 100], [10, 20, 40]]);
+  return { text: `Dos ampolletas ficticias de 10 mL: A tiene ${cA * 10} mg y B tiene ${cB * 10} mg. Para ${D} mg, ¿cuántos mL necesitas de la ampolleta B?`, ans: D / cB, unit: "mL",
+    steps: `B: ${cB * 10} mg en 10 mL = ${cB} mg/mL → ${D} ÷ ${cB} = ${fmtN(D / cB)} mL. Con A (${cA} mg/mL) serían ${fmtN(D / cA)} mL: mismo tamaño, volumen distinto.` };
+}
+
+function renderCalc() {
+  practiceShell("Práctica de cálculo", "Problemas con fármacos ficticios para practicar concentración, regla de tres y conversiones. Las cifras no son dosis clínicas.");
+  const prob = genCalc();
+  let done = false;
+  document.getElementById("practiceBody").innerHTML = `<div class="panel"><div class="small" id="calcScoreTxt">Aciertos: ${calcScore} de ${calcTotal}</div><h2>${prob.text}</h2><div class="row" style="margin:12px 0"><input type="number" step="any" id="calcAns" aria-label="Tu respuesta"><span>${prob.unit}</span><button id="calcCheck">Comprobar</button></div><div class="feedback" id="calcFb"></div></div><div class="callout warning">Ejercicio académico con fármacos ficticios. En la práctica real, todo cálculo se verifica con otra persona y con el protocolo de la unidad.</div>`;
+  const input = document.getElementById("calcAns");
+  const fb = document.getElementById("calcFb");
+  const nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Otro problema";
+  nextBtn.onclick = () => renderCalc();
+  const check = () => {
+    if (done) return;
+    const val = parseFloat(String(input.value).replace(",", "."));
+    fb.style.display = "block";
+    if (Number.isNaN(val)) { fb.textContent = "Escribe un número para comprobar."; return; }
+    done = true;
+    calcTotal++;
+    const ok = Math.abs(val - prob.ans) <= Math.max(0.005, Math.abs(prob.ans) * 0.005);
+    if (ok) calcScore++;
+    document.getElementById("calcScoreTxt").textContent = `Aciertos: ${calcScore} de ${calcTotal}`;
+    fb.innerHTML = `<b>${ok ? "¡Correcto!" : "Revisa el cálculo."}</b> Respuesta: ${fmtN(prob.ans)} ${prob.unit}.<br>${prob.steps}<br><span class="small">¿Tiene sentido el resultado? Estima y pide doble verificación en la práctica real.</span>`;
+    document.getElementById("calcCheck").disabled = true;
+    input.disabled = true;
+  };
+  document.getElementById("calcCheck").onclick = check;
+  input.onkeydown = e => { if (e.key === "Enter") check(); };
+}
+
+function setCardDifficulty(cardIdx, level) {
+  const prev = cardState[cardIdx];
+  const days = level === "hard" ? 0 : level === "good" ? 3 : (prev && prev.level === "easy" ? 14 : 7);
+  cardState[cardIdx] = { level, due: Date.now() + days * DAY };
+  save();
+}
+
+function renderNoWrong() {
+  practiceShell("Repaso de preguntas falladas", "Aquí aparecen únicamente las preguntas que fallaste.");
+  document.getElementById("practiceBody").innerHTML = `<div class="panel"><h2>No tienes errores pendientes</h2><p>Todavía no has fallado preguntas, o ya las corregiste todas. Puedes hacer la evaluación completa para seguir practicando.</p><button id="goQuiz">Hacer la evaluación completa</button></div>`;
+  document.getElementById("goQuiz").onclick = () => startPractice("quiz");
+  const nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Inicio";
+  nextBtn.onclick = () => { show("home"); renderHome(); };
+}
+
+function renderFlash() {
+  practiceShell(
+    "Tarjetas de memoria",
+    `Intenta responder antes de tocar la tarjeta. Tarjetas difíciles: ${hardCount()}.`
+  );
+  const body = document.getElementById("practiceBody");
+  const nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Inicio";
+  nextBtn.onclick = () => { show("home"); renderHome(); };
+
+  if (!flashDeck.length) {
+    body.innerHTML = `<div class="panel"><h2>No tienes tarjetas pendientes hoy</h2><p>Ya repasaste lo programado. Las tarjetas que marcas como "Bien" vuelven a aparecer en 3 días y las "Fácil" en 7 o 14 días. Si quieres practicar más, puedes repasar todo el mazo.</p><button id="flashAllBtn">Repasar todas las tarjetas</button></div>`;
+    document.getElementById("flashAllBtn").onclick = () => startPractice("flashAll");
+    return;
+  }
+
+  const cardIdx = flashDeck[flashIndex];
+  const c = cards[cardIdx];
+  const isHard = cardState[cardIdx] && cardState[cardIdx].level === "hard";
+  body.innerHTML = `<div class="small">Tarjeta ${flashIndex + 1} de ${flashDeck.length}${isHard ? " · Prioridad difícil" : ""}</div><div class="flash" id="flashCard" role="button" tabindex="0" aria-expanded="false"><div class="front">${c[0]}</div><div class="hint small" style="margin-top:18px">Toca o presiona Enter para revelar</div><div class="back">${c[1]}</div></div><div class="row" style="justify-content:center;margin-top:14px"><button class="secondary" id="hard">Difícil</button><button class="secondary" id="good">Bien</button><button class="secondary" id="easy">Fácil</button></div><p class="small" style="text-align:center">Difícil: vuelve a aparecer en el siguiente repaso · Bien: en 3 días · Fácil: en 7 días o más.</p>`;
+  const fc = document.getElementById("flashCard");
+  const toggle = () => { const r = fc.classList.toggle("revealed"); fc.setAttribute("aria-expanded", String(r)); };
+  fc.onclick = toggle;
+  fc.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } };
+
+  ["hard", "good", "easy"].forEach(lvl => {
+    document.getElementById(lvl).onclick = () => {
+      setCardDifficulty(cardIdx, lvl);
+      if (flashIndex < flashDeck.length - 1) {
+        flashIndex++;
+        renderFlash();
+      } else {
+        practiceShell("Tarjetas terminadas", "¡Bien! Vuelve cuando haya tarjetas pendientes: las difíciles aparecen primero.");
+        document.getElementById("practiceBody").innerHTML = `<div class="panel"><h2>Repaso completado</h2><p>Tienes ${hardCount()} tarjeta(s) marcada(s) como difíciles para priorizar en tu siguiente sesión.</p></div>`;
+      }
+    };
+  });
+}
+
+function renderCase() {
+  practiceShell("Casos clínicos", "Lee el escenario, piensa en voz alta y después revela el razonamiento esperado.");
+  let c = cases[practiceIndex];
+  document.getElementById("practiceBody").innerHTML = `<div class="panel"><span class="tag">CASO ${practiceIndex + 1} DE ${cases.length}</span><h2>${c.q}</h2><p><b>${c.prompt}</b></p><button id="revealCase">Mostrar razonamiento</button><div class="feedback" id="caseAnswer">${c.a}</div></div>`;
+  document.getElementById("revealCase").onclick = () => {
+    document.getElementById("caseAnswer").style.display = "block";
+    document.getElementById("revealCase").disabled = true;
+  };
+  let nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = practiceIndex === cases.length - 1 ? "Finalizar" : "Siguiente caso";
+  nextBtn.onclick = () => {
+    if (practiceIndex < cases.length - 1) {
+      practiceIndex++;
+      renderCase();
+    } else {
+      practiceShell("Casos completados", "Has terminado los casos. Repite los que te costaron trabajo.");
+      document.getElementById("practiceBody").innerHTML = "<div class='panel'><h2>Casos clínicos completados</h2><p>Vuelve a repasar los escenarios donde dudaste.</p></div>";
+      nextBtn.textContent = "Inicio";
+      nextBtn.onclick = () => { show("home"); renderHome(); };
+    }
+  };
+}
+
+function renderReview() {
+  practiceShell("Repaso E‑C‑P‑R", "Usa estas instrucciones para recuperar lo aprendido sin releer todo.");
+  document.getElementById("practiceBody").innerHTML = `<div class="panel"><h2>E — Explora</h2><p>Sin mirar, nombra las dos emergencias principales de la caja obstétrica y los dos grupos de ritmos del paro.</p><h2>C — Comprende</h2><p>Explica la diferencia entre oxitocina y tranexámico; magnesio y gluconato de calcio; adrenalina y atropina.</p><h2>P — Practica</h2><p>Resuelve los casos clínicos y las preguntas de opción múltiple.</p><h2>R — Recupera</h2><p>Cierra la aplicación e intenta enseñar el tema a otra persona. Repite mañana, en 3, 7 y 14 días.</p><div class="callout">Consejo: revisa primero tus errores guardados (${wrongQuestionIndices.length}) y tus tarjetas difíciles (${hardCount()}).</div></div>`;
+  let nextBtn = document.getElementById("nextPractice");
+  nextBtn.textContent = "Inicio";
+  nextBtn.onclick = () => { show("home"); renderHome(); };
+}
+
+document.getElementById("practiceHome").onclick = () => { show("home"); renderHome(); };
+document.getElementById("nextPractice").onclick = () => { show("home"); renderHome(); };
+
+function addPracticeCards() {
+  let home = document.getElementById("home");
+  let wrap = document.createElement("div");
+  wrap.className = "panel";
+  wrap.innerHTML = "<h2>Entrena tu memoria</h2><p>Cuando termines de estudiar, usa una de estas actividades. No consultes las respuestas antes de intentarlo.</p><div class='grid' id='practiceCards'></div>";
+  home.appendChild(wrap);
+  let pc = wrap.querySelector("#practiceCards");
+  [
+    ["Tarjetas", "Repaso espaciado: primero las difíciles y las que toca repasar hoy.", "flash"],
+    ["Preguntas", `${questions.length} preguntas: filtra por tema y mezcla el orden.`, "quiz"],
+    ["Práctica de cálculo", "Problemas al azar con fármacos ficticios: concentración, porcentaje, regla de tres y conversiones.", "calc"],
+    ["Repasar errores", "Vuelve a responder únicamente las preguntas en las que fallaste.", "wrong"],
+    ["Casos clínicos", "Aplica los conceptos a escenarios breves.", "cases"],
+    ["Repaso E‑C‑P‑R", "Planifica tu recuperación espaciada.", "review"]
+  ].forEach(x => {
+    let d = document.createElement("div");
+    d.className = "card";
+    d.innerHTML = `<h3>${x[0]}</h3><p>${x[1]}</p><button>${x[0]}</button>`;
+    d.querySelector("button").onclick = () => startPractice(x[2]);
+    pc.appendChild(d);
+  });
+}
+
+addPracticeCards();
+renderHome();
+
+const resetProgressBtn = document.getElementById("resetProgress");
+const resetConfirmBox = document.getElementById("resetConfirm");
+if (resetProgressBtn && resetConfirmBox) {
+  resetProgressBtn.onclick = () => resetConfirmBox.classList.toggle("hidden");
+  document.getElementById("confirmResetNo").onclick = () => resetConfirmBox.classList.add("hidden");
+  document.getElementById("confirmResetYes").onclick = () => {
+    completed = [];
+    cardState = {};
+    wrongQuestionIndices = [];
+    storeRemove("courseDone");
+    storeRemove("cardState");
+    storeRemove("hardCards");
+    storeRemove("wrongQuestionIndices");
+    resetConfirmBox.classList.add("hidden");
+    save();
+    renderHome();
+  };
+}
+</script>
+</body>
+</html>
