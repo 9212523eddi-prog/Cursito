@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiz a Pantalla Completa</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --card-2: #0b1220;
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --ok: #22c55e;
+      --bad: #ef4444;
+      --border: #334155;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .panel {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px;
+    }
+
+    h1 {
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.96rem;
+    }
+
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      align-items: center;
+    }
+
+    button, .file-label {
+      background: var(--accent);
+      color: #06131e;
+      border: none;
+      border-radius: 10px;
+      padding: 11px 16px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    button.secondary, .file-label.secondary {
+      background: var(--card-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    button:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .status-msg {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--accent);
+    }
+
+    /* Vista de examen */
+    #quiz-screen {
+      display: none;
+      min-height: 100vh;
+      padding: 18px 20px 28px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .topbar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .badge {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .question-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+    }
+
+    .area-tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.12);
+      padding: 4px 10px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .option-btn {
+      width: 100%;
+      text-align: left;
+      background: var(--card-2);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 500;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .option-btn.selected {
+      border-color: var(--accent);
+      background: rgba(56, 189, 248, 0.14);
+    }
+
+    .option-btn.correct {
+      border-color: var(--ok);
+      background: rgba(34, 197, 94, 0.16);
+    }
+
+    .option-btn.wrong {
+      border-color: var(--bad);
+      background: rgba(239, 68, 68, 0.16);
+    }
+
+    .feedback {
+      display: none;
+      background: var(--card-2);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      color: var(--text);
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .result-item {
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      margin-top: 12px;
+      font-size: 0.92rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- PANTALLA DE CARGA -->
+  <div class="container" id="setup-screen">
+    <div class="panel">
+      <h1>Quiz a Pantalla Completa</h1>
+      <p>Carga un archivo <strong>.json</strong> con tus preguntas o inicia con el examen de prueba. Al iniciar, se intentará activar la pantalla completa.</p>
+
+      <div class="controls-row">
+        <label class="file-label secondary" for="json-file">
+          Cargar examen (.json)
+        </label>
+        <input type="file" id="json-file" accept=".json,application/json,text/plain,*/*" />
+
+        <button id="btn-start">Iniciar en pantalla completa</button>
+        <button class="secondary" id="btn-sample">Cargar ejemplo EGAL IELECTRO</button>
+      </div>
+
+      <div class="status-msg" id="status-msg">Examen cargado: Ejemplo base (3 preguntas)</div>
+    </div>
+  </div>
+
+  <!-- PANTALLA DE QUIZ -->
+  <div id="quiz-screen">
+    <div class="topbar">
+      <div>
+        <div class="badge" id="quiz-title">Quiz</div>
+        <div class="badge" id="quiz-progress">Pregunta 1 de 3</div>
+      </div>
+      <div class="controls-row" style="margin-top:0;">
+        <span class="badge" id="quiz-timer">00:00</span>
+        <button class="secondary" id="btn-toggle-fs">Pantalla completa</button>
+        <button class="secondary" id="btn-exit">Salir</button>
+      </div>
+    </div>
+
+    <div class="question-box" id="question-card">
+      <span class="area-tag" id="q-area">Área</span>
+      <div class="question-text" id="q-text">Texto de la pregunta</div>
+      <div class="options" id="q-options"></div>
+      <div class="feedback" id="q-feedback"></div>
+    </div>
+
+    <div class="footer-nav">
+      <button class="secondary" id="btn-prev">Anterior</button>
+      <div class="controls-row" style="margin-top:0;">
+        <button class="secondary" id="btn-finish">Terminar y calificar</button>
+        <button id="btn-next">Siguiente</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const sampleExam = {
+      titulo: "Práctica base - EGAL IELECTRO",
+      preguntas: [
+        {
+          id: 1,
+          area: "Área 1. Diseño (1.3 Modelado y simulación)",
+          pregunta: "En un amplificador operacional configurado como seguidor de voltaje ideal (ganancia unitaria), si se aplica una entrada de 3.3 V en la terminal no inversora, ¿cuál es el voltaje de salida?",
+          opciones: {
+            A: "3.3 V",
+            B: "0 V",
+            C: "-3.3 V"
+          },
+          correcta: "A",
+          explicacion: "Un seguidor de voltaje tiene ganancia de tensión cercana a 1 (lazo cerrado con retroalimentación negativa a la entrada inversora), por lo que la salida sigue el valor de entrada."
+        },
+        {
+          id: 2,
+          area: "Área 2. Construcción (2.3 Prototipo experimental)",
+          pregunta: "En el diseño de una fuente de alimentación lineal clásica a partir de corriente alterna de red, ¿cuál es el orden correcto de las etapas?",
+          opciones: {
+            A: "Rectificación, transformación, regulación y filtrado",
+            B: "Transformación, rectificación, filtrado y regulación",
+            C: "Filtrado, transformación, rectificación y regulación"
+          },
+          correcta: "B",
+          explicacion: "Primero se transforma el nivel de voltaje de CA, luego se rectifica (a corriente pulsante), se filtra para reducir el rizado y finalmente se regula para estabilizar la salida."
+        },
+        {
+          id: 3,
+          area: "Área 3. Operación (3.1 Uso y medición)",
+          pregunta: "Al medir voltaje en paralelo con un multímetro sobre un componente en un circuito, se busca que la resistencia interna del voltímetro sea:",
+          opciones: {
+            A: "Lo más baja posible para no alterar el circuito",
+            B: "Igual a 0 Ω para evitar caídas",
+            C: "Lo más alta posible para no cargar el circuito"
+          },
+          correcta: "C",
+          explicacion: "Un voltímetro ideal tiene resistencia interna infinita (muy alta en la práctica) para desviar la menor corriente posible y no alterar el voltaje medido."
+        }
+      ]
+    };
+
+    let currentExam = structuredClone(sampleExam);
+    let currentIndex = 0;
+    let userAnswers = {};
+    let secondsElapsed = 0;
+    let timerInterval = null;
+
+    const setupScreen = document.getElementById("setup-screen");
+    const quizScreen = document.getElementById("quiz-screen");
+    const statusMsg = document.getElementById("status-msg");
+    const fileInput = document.getElementById("json-file");
+
+    function updateStatus(text) {
+      statusMsg.textContent = text;
+    }
+
+    fileInput.addEventListener("change", (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        try {
+          const parsed = JSON.parse(event.target.result);
+          if (!Array.isArray(parsed.preguntas) || parsed.preguntas.length === 0) {
+            throw new Error("El JSON debe incluir un arreglo 'preguntas' con al menos un elemento.");
+          }
+          currentExam = {
+            titulo: parsed.titulo || file.name,
+            preguntas: parsed.preguntas
+          };
+          updateStatus(`Cargado: "${currentExam.titulo}" (${currentExam.preguntas.length} preguntas)`);
+        } catch (err) {
+          updateStatus(`Error al leer el JSON: ${err.message}`);
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    document.getElementById("btn-sample").addEventListener("click", () => {
+      currentExam = structuredClone(sampleExam);
+      updateStatus(`Cargado: "${currentExam.titulo}" (${currentExam.preguntas.length} preguntas)`);
+    });
+
+    async function enterFullscreen() {
+      try {
+        if (!document.fullscreenElement && document.documentElement.requestFullscreen) {
+          await document.documentElement.requestFullscreen();
+        }
+      } catch (_) {
+        // Algunos navegadores bloquean fullscreen si no es gesto directo o en ciertos webviews
+      }
+    }
+
+    async function exitFullscreen() {
+      try {
+        if (document.fullscreenElement && document.exitFullscreen) {
+          await document.exitFullscreen();
+        }
+      } catch (_) {}
+    }
+
+    document.getElementById("btn-toggle-fs").addEventListener("click", async () => {
+      if (document.fullscreenElement) {
+        await exitFullscreen();
+      } else {
+        await enterFullscreen();
+      }
+    });
+
+    function startTimer() {
+      clearInterval(timerInterval);
+      secondsElapsed = 0;
+      renderTimer();
+      timerInterval = setInterval(() => {
+        secondsElapsed++;
+        renderTimer();
+      }, 1000);
+    }
+
+    function renderTimer() {
+      const mins = String(Math.floor(secondsElapsed / 60)).padStart(2, "0");
+      const secs = String(secondsElapsed % 60).padStart(2, "0");
+      document.getElementById("quiz-timer").textContent = `${mins}:${secs}`;
+    }
+
+    document.getElementById("btn-start").addEventListener("click", async () => {
+      currentIndex = 0;
+      userAnswers = {};
+      setupScreen.style.display = "none";
+      quizScreen.style.display = "flex";
+      await enterFullscreen();
+      startTimer();
+      renderQuestion();
+    });
+
+    document.getElementById("btn-exit").addEventListener("click", async () => {
+      clearInterval(timerInterval);
+      quizScreen.style.display = "none";
+      setupScreen.style.display = "flex";
+      await exitFullscreen();
+    });
+
+    function renderQuestion() {
+      const total = currentExam.preguntas.length;
+      const q = currentExam.preguntas[currentIndex];
+      const chosen = userAnswers[currentIndex];
+      const feedbackEl = document.getElementById("q-feedback");
+
+      document.getElementById("quiz-title").textContent = currentExam.titulo;
+      document.getElementById("quiz-progress").textContent = `Pregunta ${currentIndex + 1} de ${total}`;
+      document.getElementById("q-area").textContent = q.area || "General";
+      document.getElementById("q-text").textContent = q.pregunta;
+
+      const optionsContainer = document.getElementById("q-options");
+      optionsContainer.innerHTML = "";
+
+      Object.entries(q.opciones || {}).forEach(([key, label]) => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerHTML = `<strong>${key})</strong> <span>${label}</span>`;
+
+        if (chosen) {
+          if (key === q.correcta) btn.classList.add("correct");
+          if (key === chosen && chosen !== q.correcta) btn.classList.add("wrong");
+        }
+
+        btn.addEventListener("click", () => {
+          userAnswers[currentIndex] = key;
+          renderQuestion();
+        });
+
+        optionsContainer.appendChild(btn);
+      });
+
+      if (chosen) {
+        const esCorrecta = chosen === q.correcta;
+        feedbackEl.style.display = "block";
+        feedbackEl.style.borderLeftColor = esCorrecta ? "var(--ok)" : "var(--bad)";
+        feedbackEl.innerHTML = `
+          <strong>${esCorrecta ? "Correcta" : `Incorrecta (Respuesta correcta: ${q.correcta})`}</strong><br />
+          ${q.explicacion || "Sin explicación adicional."}
+        `;
+      } else {
+        feedbackEl.style.display = "none";
+      }
+
+      document.getElementById("btn-prev").disabled = currentIndex === 0;
+      document.getElementById("btn-next").textContent = currentIndex === total - 1 ? "Ver resumen" : "Siguiente";
+    }
+
+    document.getElementById("btn-prev").addEventListener("click", () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        renderQuestion();
+      }
+    });
+
+    document.getElementById("btn-next").addEventListener("click", () => {
+      if (currentIndex < currentExam.preguntas.length - 1) {
+        currentIndex++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    });
+
+    document.getElementById("btn-finish").addEventListener("click", showResults);
+
+    function showResults() {
+      clearInterval(timerInterval);
+      const total = currentExam.preguntas.length;
+      let correctCount = 0;
+      let detailsHtml = "";
+
+      currentExam.preguntas.forEach((q, idx) => {
+        const chosen = userAnswers[idx] || "Sin responder";
+        const isOk = chosen === q.correcta;
+        if (isOk) correctCount++;
+
+        detailsHtml += `
+          <div class="result-item">
+            <strong>${idx + 1}. ${q.pregunta}</strong><br />
+            Tu respuesta: <strong>${chosen}</strong> | Correcta: <strong>${q.correcta}</strong>
+            ${!isOk && q.explicacion ? `<br /><span style="color:var(--muted);">${q.explicacion}</span>` : ""}
+          </div>
+        `;
+      });
+
+      const pct = total > 0 ? Math.round((correctCount / total) * 100) : 0;
+
+      document.getElementById("question-card").innerHTML = `
+        <h2>Resultado final</h2>
+        <p style="font-size:1.1rem; color:var(--text); margin-top:6px;">
+          Aciertos: <strong>${correctCount} / ${total}</strong> (${pct}%) — Tiempo: <strong>${document.getElementById("quiz-timer").textContent}</strong>
+        </p>
+        <div style="margin-top:12px; max-height:55vh; overflow-y:auto;">
+          ${detailsHtml}
+        </div>
+        <div class="controls-row">
+          <button onclick="location.reload()">Cargar otro / Reiniciar</button>
+        </div>
+      `;
+      document.querySelector(".footer-nav").style.display = "none";
+    }
+  </script>
+</body>
+</html>
